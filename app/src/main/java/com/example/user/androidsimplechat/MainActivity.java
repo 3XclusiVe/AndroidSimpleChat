@@ -1,20 +1,28 @@
 package com.example.user.androidsimplechat;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.example.user.androidsimplechat.frames.SignFrame;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements IFramable
 {
     private static Fragment currentFragment;
+    private static Fragment startFragment = new SignFrame();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            loadFrame(startFragment);
+        }
     }
 
     @Override
@@ -39,5 +47,14 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void loadFrame(Fragment fragmentToLoad)
+    {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment, fragmentToLoad);
+        ft.addToBackStack("stack");
+        ft.commit();
     }
 }
