@@ -1,0 +1,50 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+        >
+    <TableRow>
+        <ImageView
+                android:id="@+id/chat_icon"
+                android:src="@drawable/icon"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                />
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                     android:layout_width="fill_parent"
+                     android:layout_height="fill_parent"
+                >
+            <TableRow android:layout_marginTop="10dp">
+                <TextView
+                        android:id="@+id/chat_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="NameOfChat"/>
+                <TextView
+                        android:id="@+id/chat_online_user_count"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="(Number of users)"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:id="@+id/chat_description"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="15sp"
+                        android:textIsSelectable="false"
+                        android:text="Chat about us"
+                        android:textStyle="italic"
+                        />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </TableRow>
+</TableLayout>
