@@ -1,13 +1,14 @@
 package com.example.user.androidsimplechat;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.user.androidsimplechat.frames.SignFrame;
+import com.example.user.androidsimplechat.frames.UserInfoFrame;
 
 public class MainActivity extends AppCompatActivity implements IFramable
 {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements IFramable
 
         if (savedInstanceState == null) {
             loadFrame(startFragment);
+            Log.d("1", "1");
         }
     }
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements IFramable
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            loadFrame(new UserInfoFrame());
             return true;
         }
 
@@ -52,9 +55,13 @@ public class MainActivity extends AppCompatActivity implements IFramable
     @Override
     public void loadFrame(Fragment fragmentToLoad)
     {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment, fragmentToLoad);
-        ft.addToBackStack("stack");
-        ft.commit();
+        if (fragmentToLoad != currentFragment) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, fragmentToLoad);
+            ft.addToBackStack(null);
+            ft.commit();
+            currentFragment = fragmentToLoad;
+        }
     }
+
 }

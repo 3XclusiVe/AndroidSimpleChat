@@ -1,10 +1,11 @@
 package com.example.user.androidsimplechat.frames;
 
+import android.util.Log;
 import android.widget.Button;
 import com.example.user.androidsimplechat.IFramable;
 import com.example.user.androidsimplechat.R;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +14,11 @@ import android.view.ViewGroup;
 /**
  * Created by user on 07.11.15.
  */
-public class SignFrame extends Fragment
+public class SignFrame extends FrameAttachedToMainActivity
 {
-    private IFramable mainActivity;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
-        if (getActivity() != null) {
-            mainActivity = (IFramable) getActivity();
-        }
-
-
+        super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.sign_frame, null);
 
         Button button = (Button) v.findViewById(R.id.sign_button);
@@ -33,7 +27,7 @@ public class SignFrame extends Fragment
                                   {
                                       public void onClick(View v)
                                       {
-                                          mainActivity.loadFrame(new ChatRoomFrame());
+                                          mainActivity.loadFrame(new ChatListFrame());
                                       }
                                   }
 
