@@ -1,14 +1,10 @@
 package com.example.user.androidsimplechat.frames;
 
-import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.example.user.androidsimplechat.IFramable;
 import com.example.user.androidsimplechat.R;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 /**
@@ -32,7 +28,7 @@ public class ChatListFrame extends FrameAttachedToMainActivity
         }
 
         // создаем адаптер
-        ChatListAdapter adapter = new ChatListAdapter(getContext(), R.layout.chat_list_element, R.id.chat_name, strings);
+        ChatListAdapter adapter = new ChatListAdapter(getActivity(), R.layout.chat_list_element, R.id.chat_name, strings);
 
         // присваиваем адаптер списку
         listView.setAdapter(adapter);

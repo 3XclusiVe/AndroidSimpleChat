@@ -1,25 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.user.androidsimplechat.MainActivity">
+
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings"
+          android:icon="@drawable/ic_settings_white_48dp"
           android:orderInCategory="100"
-          app:showAsAction="never"/>
+          android:showAsAction="always" tools:ignore="AppCompatResource"/>
 
-    <item
-            android:id="@+id/action_camera"
-            android:orderInCategory="100"
-            android:icon="@drawable/icon"
-            android:title="camera"
-            app:showAsAction="ifRoom|collapseActionView"/>
+    <item android:id="@+id/action_account"
+          android:icon="@drawable/ic_account_box_white_24dp"
+          android:title="@string/action_account"
+          android:orderInCategory="100"
+          android:showAsAction="always" tools:ignore="AppCompatResource"/>
 
-    <!-- SEARCH -->
-    <item
-            android:id="@+id/action_search"
-            android:orderInCategory="100"
-            android:icon="@drawable/icon"
-            android:title="search"
-            app:actionViewClass="android.support.v7.widget.SearchView"
-            app:showAsAction="ifRoom|collapseActionView"/>
 </menu>

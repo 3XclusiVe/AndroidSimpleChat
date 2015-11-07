@@ -1,11 +1,11 @@
 package com.example.user.androidsimplechat;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 
-public class SplashScreen extends AppCompatActivity
+public class SplashScreen extends Activity
 {
 
     @Override

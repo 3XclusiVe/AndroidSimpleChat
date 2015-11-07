@@ -1,16 +1,17 @@
 package com.example.user.androidsimplechat;
 
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v4.app.FragmentTransaction;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.example.user.androidsimplechat.frames.Preferences;
 import com.example.user.androidsimplechat.frames.SignFrame;
 import com.example.user.androidsimplechat.frames.UserInfoFrame;
 
-public class MainActivity extends AppCompatActivity implements IFramable
+public class MainActivity extends Activity implements IFramable
 {
     private static Fragment currentFragment;
     private static Fragment startFragment = new SignFrame();
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements IFramable
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         return true;
@@ -47,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements IFramable
 
         switch (id) {
             case R.id.action_settings:
+                loadFrame(new Preferences());
+                return true;
+
+            case R.id.action_account:
                 loadFrame(new UserInfoFrame());
                 return true;
 
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements IFramable
     public void loadFrame(Fragment fragmentToLoad)
     {
         if (fragmentToLoad != currentFragment) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, fragmentToLoad);
             if (currentFragment != null) {
                 ft.addToBackStack(null);
@@ -72,11 +77,4 @@ public class MainActivity extends AppCompatActivity implements IFramable
             currentFragment = fragmentToLoad;
         }
     }
-
-    public void setActionBarTitle(String title)
-    {
-        getSupportActionBar().setTitle(title);
-    }
-
-
 }

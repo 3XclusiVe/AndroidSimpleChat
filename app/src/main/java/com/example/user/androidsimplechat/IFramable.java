@@ -1,6 +1,7 @@
 package com.example.user.androidsimplechat;
 
-import android.support.v4.app.Fragment;
+
+import android.app.Fragment;
 
 /**
  * Created by user on 07.11.15.
