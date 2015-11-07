@@ -1,10 +1,10 @@
 package com.example.user.androidsimplechat;
 
+import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.user.androidsimplechat.frames.SignFrame;
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements IFramable
 
         if (savedInstanceState == null) {
             loadFrame(startFragment);
-            Log.d("1", "1");
         }
     }
 
@@ -32,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements IFramable
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
@@ -43,10 +45,14 @@ public class MainActivity extends AppCompatActivity implements IFramable
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            loadFrame(new UserInfoFrame());
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+                loadFrame(new UserInfoFrame());
+                return true;
+
+            case R.id.home:
+                this.finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -58,10 +64,19 @@ public class MainActivity extends AppCompatActivity implements IFramable
         if (fragmentToLoad != currentFragment) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, fragmentToLoad);
-            ft.addToBackStack(null);
+            if (currentFragment != null) {
+                ft.addToBackStack(null);
+            }
             ft.commit();
+            this.invalidateOptionsMenu();
             currentFragment = fragmentToLoad;
         }
     }
+
+    public void setActionBarTitle(String title)
+    {
+        getSupportActionBar().setTitle(title);
+    }
+
 
 }

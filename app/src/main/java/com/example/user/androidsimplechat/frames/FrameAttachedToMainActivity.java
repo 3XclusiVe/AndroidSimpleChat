@@ -1,16 +1,10 @@
 package com.example.user.androidsimplechat.frames;
 
-import android.util.Log;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.view.*;
 import com.example.user.androidsimplechat.IFramable;
-import com.example.user.androidsimplechat.R;
-
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.example.user.androidsimplechat.R;
 
 /**
  * Created by user on 07.11.15.
@@ -18,6 +12,8 @@ import android.view.ViewGroup;
 public abstract class FrameAttachedToMainActivity extends Fragment
 {
     protected IFramable mainActivity;
+    private int mActionBar;
+    private String mActionBarTitle;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -26,6 +22,27 @@ public abstract class FrameAttachedToMainActivity extends Fragment
             mainActivity = (IFramable) getActivity();
         }
 
+        mActionBar = getActionBar();
+        mActionBarTitle = getActionBarTitle();
+
+        setHasOptionsMenu(true);
+
         return null;
+    }
+
+    protected abstract String getActionBarTitle();
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(mActionBar, menu);
+        getActivity().setTitle(mActionBarTitle);
+    }
+
+    protected int getActionBar()
+    {
+        return R.menu.fragment_menu;
     }
 }

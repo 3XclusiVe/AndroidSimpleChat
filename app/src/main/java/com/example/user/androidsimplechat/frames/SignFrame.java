@@ -1,11 +1,8 @@
 package com.example.user.androidsimplechat.frames;
 
-import android.util.Log;
 import android.widget.Button;
-import com.example.user.androidsimplechat.IFramable;
 import com.example.user.androidsimplechat.R;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,5 +31,11 @@ public class SignFrame extends FrameAttachedToMainActivity
         );
 
         return v;
+    }
+
+    @Override
+    protected String getActionBarTitle()
+    {
+        return getString(R.string.title_sign);
     }
 }

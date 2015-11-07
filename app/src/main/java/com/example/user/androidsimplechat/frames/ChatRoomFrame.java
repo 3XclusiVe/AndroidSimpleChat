@@ -2,7 +2,6 @@ package com.example.user.androidsimplechat.frames;
 
 import com.example.user.androidsimplechat.R;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,5 +18,11 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.chat_room_frame, null);
         return v;
+    }
+
+    @Override
+    protected String getActionBarTitle()
+    {
+        return getString(R.string.title_chat_room);
     }
 }

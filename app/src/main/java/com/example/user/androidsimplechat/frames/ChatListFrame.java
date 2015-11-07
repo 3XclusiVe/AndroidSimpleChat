@@ -1,6 +1,8 @@
 package com.example.user.androidsimplechat.frames;
 
+import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.user.androidsimplechat.IFramable;
@@ -8,9 +10,6 @@ import com.example.user.androidsimplechat.R;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Created by user on 07.11.15.
@@ -50,9 +49,10 @@ public class ChatListFrame extends FrameAttachedToMainActivity
         return v;
     }
 
-    public void OnActivityCreated(Bundle savedInstanceState)
+    @Override
+    protected String getActionBarTitle()
     {
-        super.onActivityCreated(savedInstanceState);
+        return getString(R.string.title_chat_list);
     }
 
 }

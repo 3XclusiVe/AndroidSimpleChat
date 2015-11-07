@@ -11,4 +11,9 @@
     <string name="btn_join">JOIN</string>
     <string name="btn_send">Send</string>
 
+    <string name="title_chat_list">Chat List</string>
+    <string name="title_user_info">User Info</string>
+    <string name="title_chat_room">Chat Room</string>
+    <string name="title_sign">Sign</string>
+
 </resources>
