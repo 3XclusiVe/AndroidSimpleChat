@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import com.example.user.androidsimplechat.R;
+import com.example.user.androidsimplechat.model.ChatRoom;
 
 /**
  * Created by user on 07.11.15.
@@ -14,27 +16,27 @@ public class ChatListAdapter extends BaseAdapter
 {
 
     private Context mContext;
-    private String[] mData;
+    private ChatRoom[] mData;
     private int mResource;
-    private int mTextViewResourceId;
 
 
-    public ChatListAdapter(Context context, int resource, int textViewResourceId, String[] objects)
+    public ChatListAdapter(Context context, int resource, ChatRoom[] objects)
     {
         mContext = context;
         mData = objects;
         mResource = resource;
-        mTextViewResourceId = textViewResourceId;
     }
 
 
     static class ViewHolder
     {
-        TextView txtItem;
+        protected TextView chatName;
+        protected TextView onlineUserCount;
+        protected TextView chatDescription;
     }
 
     @Override
-    public String getItem(int i)
+    public ChatRoom getItem(int i)
     {
         return mData[i];
     }
@@ -47,14 +49,20 @@ public class ChatListAdapter extends BaseAdapter
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(mResource, viewGroup, false);
+
             viewHolder = new ViewHolder();
-            viewHolder.txtItem = (TextView) convertView.findViewById(mTextViewResourceId);
+            viewHolder.chatName = (TextView) convertView.findViewById(R.id.chat_name);
+            viewHolder.onlineUserCount = (TextView) convertView.findViewById(R.id.chat_online_user_count);
+            viewHolder.chatDescription = (TextView) convertView.findViewById(R.id.chat_description);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.txtItem.setText(getItem(position));
+        ChatRoom chatRoom = getItem(position);
+        viewHolder.chatName.setText(chatRoom.getName());
+        viewHolder.onlineUserCount.setText(representOnlineUserCount(chatRoom.getOnlineUserCount()));
+        viewHolder.chatDescription.setText(chatRoom.getDescription());
 
         return convertView;
     }
@@ -69,6 +77,11 @@ public class ChatListAdapter extends BaseAdapter
     public int getCount()
     {
         return mData.length;
+    }
+
+    private String representOnlineUserCount(Integer OnlineUserCount)
+    {
+        return "( " + OnlineUserCount.toString() + " )";
     }
 
 }
