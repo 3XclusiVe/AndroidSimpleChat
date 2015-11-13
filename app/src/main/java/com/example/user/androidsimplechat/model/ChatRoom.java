@@ -8,12 +8,20 @@ public class ChatRoom
     private String name;
     private int onlineUserCount;
     private String description;
+    private String chatId;
 
-    public ChatRoom(String name, int onlineUserCount, String description)
+    public ChatRoom(String name, int onlineUserCount, String description, String chatId)
     {
         this.name = name;
         this.onlineUserCount = onlineUserCount;
         this.description = description;
+        this.chatId = chatId;
+    }
+
+    public void print()
+    {
+        System.out.print("_\n" + name + " " + onlineUserCount + "\n" +
+                description + "\n");
     }
 
     public String getName()
@@ -29,6 +37,11 @@ public class ChatRoom
     public String getDescription()
     {
         return description;
+    }
+
+    public String getChatId()
+    {
+        return chatId;
     }
 
     public void setName(String name)

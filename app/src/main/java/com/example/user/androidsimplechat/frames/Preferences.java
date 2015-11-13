@@ -2,6 +2,8 @@ package com.example.user.androidsimplechat.frames;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.view.Menu;
+import android.view.MenuInflater;
 import com.example.user.androidsimplechat.R;
 
 /**
@@ -14,6 +16,14 @@ public class Preferences extends PreferenceFragment
     {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.settings_menu, menu);
     }
 
 }

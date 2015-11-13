@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.example.user.androidsimplechat.R;
 import com.example.user.androidsimplechat.model.ChatRoom;
 
+import java.util.*;
+
 /**
  * Created by user on 07.11.15.
  */
@@ -16,11 +18,11 @@ public class ChatListAdapter extends BaseAdapter
 {
 
     private Context mContext;
-    private ChatRoom[] mData;
+    private List<ChatRoom> mData;
     private int mResource;
 
 
-    public ChatListAdapter(Context context, int resource, ChatRoom[] objects)
+    public ChatListAdapter(Context context, int resource, List<ChatRoom> objects)
     {
         mContext = context;
         mData = objects;
@@ -38,7 +40,7 @@ public class ChatListAdapter extends BaseAdapter
     @Override
     public ChatRoom getItem(int i)
     {
-        return mData[i];
+        return mData.get(i);
     }
 
     @Override
@@ -76,7 +78,7 @@ public class ChatListAdapter extends BaseAdapter
     @Override
     public int getCount()
     {
-        return mData.length;
+        return mData.size();
     }
 
     private String representOnlineUserCount(Integer OnlineUserCount)

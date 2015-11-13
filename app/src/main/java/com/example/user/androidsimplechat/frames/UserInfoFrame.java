@@ -24,4 +24,10 @@ public class UserInfoFrame extends FrameAttachedToMainActivity
     {
         return getString(R.string.title_user_info);
     }
+
+    @Override
+    protected int getActionBar()
+    {
+        return R.menu.user_info_menu;
+    }
 }

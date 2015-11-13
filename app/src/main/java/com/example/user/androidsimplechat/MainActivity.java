@@ -5,16 +5,20 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.example.user.androidsimplechat.frames.ChatListFrame;
 import com.example.user.androidsimplechat.frames.Preferences;
 import com.example.user.androidsimplechat.frames.SignFrame;
 import com.example.user.androidsimplechat.frames.UserInfoFrame;
+import com.example.user.androidsimplechat.model.Client;
 
 public class MainActivity extends Activity implements IFramable
 {
     private static Fragment currentFragment;
     private static Fragment startFragment = new SignFrame();
+    private static Client serverClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,10 +58,6 @@ public class MainActivity extends Activity implements IFramable
             case R.id.action_account:
                 loadFrame(new UserInfoFrame());
                 return true;
-
-            case R.id.home:
-                this.finish();
-                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -75,6 +75,36 @@ public class MainActivity extends Activity implements IFramable
             ft.commit();
             this.invalidateOptionsMenu();
             currentFragment = fragmentToLoad;
+        }
+    }
+
+    @Override
+    public Client getClient()
+    {
+        return serverClient;
+    }
+
+    @Override
+    public void setClient(Client client)
+    {
+        serverClient = client;
+    }
+
+    @Override
+    public void onAuth()
+    {
+        ChatListFrame frame;
+        frame = (ChatListFrame) currentFragment;
+        frame.onAuthorization("ok");
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        if ((currentFragment instanceof SignFrame) || (currentFragment instanceof ChatListFrame)) {
+            currentFragment = null;
+            this.finish();
         }
     }
 }

@@ -10,7 +10,7 @@
     <EditText
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/login"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,15 +22,15 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editText2"
-            android:layout_below="@+id/editText"
-            android:layout_alignLeft="@+id/editText"
-            android:layout_alignStart="@+id/editText"/>
+            android:id="@+id/password"
+            android:layout_below="@+id/login"
+            android:layout_alignLeft="@+id/login"
+            android:layout_alignStart="@+id/login"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_sign"
             android:id="@+id/sign_button"
-            android:layout_below="@+id/editText2"
+            android:layout_below="@+id/password"
             android:layout_centerHorizontal="true"/>
 </RelativeLayout>

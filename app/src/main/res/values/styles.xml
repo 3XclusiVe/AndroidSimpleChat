@@ -4,6 +4,11 @@
         <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
     </style>
 
+    <style name="ChatAppThemeNoActionBar"
+           parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
+    </style>
+
     <style name="MyActionBarTheme"
            parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/actionbar</item>

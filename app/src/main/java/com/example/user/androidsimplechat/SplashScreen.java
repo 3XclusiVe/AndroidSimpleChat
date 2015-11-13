@@ -29,4 +29,11 @@ public class SplashScreen extends Activity
         return false;
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        this.finish();
+    }
+
 }

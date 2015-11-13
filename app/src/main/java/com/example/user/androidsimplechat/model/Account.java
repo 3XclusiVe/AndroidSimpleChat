@@ -6,13 +6,21 @@ package com.example.user.androidsimplechat.model;
 public class Account
 {
     private String name;
-    private Status status;
+    private String status;
 
 
-    public Account(String name, Status status)
+    public Account(String name, String status)
     {
         this.name = name;
         this.status = status;
+    }
+
+    public void print()
+    {
+        System.out.println("__");
+        System.out.println("name: " + name);
+        System.out.println("status: " + status);
+        System.out.println("==");
     }
 
     public String getName()
@@ -20,7 +28,7 @@ public class Account
         return name;
     }
 
-    public Status getStatus()
+    public String getStatus()
     {
         return status;
     }
@@ -30,10 +38,8 @@ public class Account
         this.name = name;
     }
 
-    public void setStatus(Status status)
+    public void setStatus(String status)
     {
         this.status = status;
     }
-
-
 }
