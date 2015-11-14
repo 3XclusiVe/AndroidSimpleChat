@@ -5,12 +5,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.*;
 
 import java.io.IOException;
 import java.util.List;
 
-public class Client implements ICallbackable
+public class Client implements ICallbackable, Serializable
 {
     private String selfSessionId = new String();
     private String selfUserId = new String();
@@ -41,7 +42,7 @@ public class Client implements ICallbackable
 
         observers = new ArrayList<IChatServerResponcesObserver>();
 
-        socketClient.sendRequest(Protocol.authorization(login, password));
+        socketClient.sendRequest(Protocol.registration(login, password, nickname));
 
         /**
          synchronized (lock) {
@@ -51,6 +52,26 @@ public class Client implements ICallbackable
          e.printStackTrace();
          }
          }**/
+    }
+
+    public Client(String login, String password) throws IOException
+    {
+        socketClient = new SocketClient(IP, Port, this);
+
+        this.selfLogin = login;
+        this.selfPassword = password;
+
+        socketClient.connect();
+        socketClient.sendHello();
+
+        observers = new ArrayList<IChatServerResponcesObserver>();
+
+        socketClient.sendRequest(Protocol.authorization(login, password));
+    }
+
+    private void resetConnection() throws IOException
+    {
+        socketClient.sendRequest(Protocol.authorization(selfLogin, selfPassword));
     }
 
     public void subscribe(IChatServerResponcesObserver observer)
@@ -157,13 +178,26 @@ public class Client implements ICallbackable
             case Status.OK:
                 selfSessionId = getSessionId(responce);
                 selfUserId = getUserId(responce);
-                synchronized (lock) {
-                    lock.notifyAll();
+
+                for (IChatServerResponcesObserver observer : observers) {
+                    observer.onRegister("OK");
                 }
                 break;
 
+            case Status.NickAlreadyWasUsed:
+                try {
+                    resetConnection();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+
             default:
-                throw new IllegalArgumentException();
+                for (IChatServerResponcesObserver observer : observers) {
+                    observer.onRegister("error");
+                }
+                break;
         }
     }
 
@@ -180,14 +214,14 @@ public class Client implements ICallbackable
                 selfUserId = getUserId(responce);
 
                 for (IChatServerResponcesObserver observer : observers) {
-                    observer.onAuthorization("Ok");
+                    observer.onAuthorization("OK");
                 }
                 break;
 
-            /*
-            case Status.NickAlreadyWasUsed:
-                throw new IllegalArgumentException("NickAlreadyWasUsed");
 
+
+
+            /*
             case Status.InvalidLoginOrPassword:
                 throw new IllegalArgumentException("InvalidLoginOrPassword");
 
@@ -198,10 +232,13 @@ public class Client implements ICallbackable
                     e.printStackTrace();
                 }
                 break;
-                */
+            */
 
             default:
-                throw new IllegalArgumentException();
+                for (IChatServerResponcesObserver observer : observers) {
+                    observer.onAuthorization("error");
+                }
+                break;
         }
     }
 
@@ -321,6 +358,11 @@ public class Client implements ICallbackable
 
             Message message = new Message("покинул канал", userId, nick);
             message.print();
+
+            for (IChatServerResponcesObserver observer : observers) {
+                observer.onMessage(message);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -339,6 +381,11 @@ public class Client implements ICallbackable
 
             Message message = new Message("зашел на канал", userId, nick);
             message.print();
+
+            for (IChatServerResponcesObserver observer : observers) {
+                observer.onUserEnterToChannel(message);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -357,6 +404,11 @@ public class Client implements ICallbackable
 
             Message message = new Message(content, userId, nick);
             message.print();
+
+            for (IChatServerResponcesObserver observer : observers) {
+                observer.onMessage(message);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

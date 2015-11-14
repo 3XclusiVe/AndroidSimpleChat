@@ -8,4 +8,11 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".SplashScreen">
 
+    <FrameLayout
+            android:id="@+id/fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+    </FrameLayout>
+
 </RelativeLayout>

@@ -1,35 +1,55 @@
 package com.example.user.androidsimplechat.frames;
 
+import android.app.Fragment;
+import android.provider.ContactsContract;
 import android.widget.Button;
 import android.widget.EditText;
-import com.example.user.androidsimplechat.MainActivity;
+import com.example.user.androidsimplechat.ILoadable;
 import com.example.user.androidsimplechat.R;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.user.androidsimplechat.model.Client;
-
-import java.io.IOException;
 
 /**
  * Created by user on 07.11.15.
  */
-public class SignFrame extends FrameAttachedToMainActivity
+public class SignFrame extends Fragment
 {
+    private ILoadable mainActivity;
+    Button button;
+    EditText loginEditText;
+    EditText passwordEditText;
+    EditText nicknameEditText;
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
-
         View v = inflater.inflate(R.layout.sign_frame, null);
 
-        final Button button = (Button) v.findViewById(R.id.sign_button);
-        final EditText loginEditText = (EditText) v.findViewById(R.id.login);
-        final EditText passwordEditText = (EditText) v.findViewById(R.id.password);
+        if (mainActivity == null) {
+            mainActivity = (ILoadable) getActivity();
+        }
+
+        button = (Button) v.findViewById(R.id.sign_button);
+        loginEditText = (EditText) v.findViewById(R.id.login);
+        passwordEditText = (EditText) v.findViewById(R.id.password);
+        nicknameEditText = (EditText) v.findViewById(R.id.nickname);
 
         loginEditText.setText("mmmalkin007@mail.r");
         passwordEditText.setText("12345");
+        nicknameEditText.setText("QW12");
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
 
         button.setOnClickListener(new View.OnClickListener()
 
@@ -38,30 +58,14 @@ public class SignFrame extends FrameAttachedToMainActivity
                                       {
 
                                           String login = loginEditText.getText().toString();
-                                          String password = loginEditText.getText().toString();
-                                          String nick = "QW12";
+                                          String password = passwordEditText.getText().toString();
+                                          String nick = nicknameEditText.getText().toString();
 
-                                          RetrieveFeedTask task = new RetrieveFeedTask(mainActivity);
-                                          task.execute();
-
-                                          mainActivity.loadFrame(new ChatListFrame());
+                                          Connection connection = new Connection(mainActivity);
+                                          connection.execute(login, password, nick);
                                       }
                                   }
 
         );
-
-        return v;
-    }
-
-    @Override
-    protected String getActionBarTitle()
-    {
-        return getString(R.string.title_sign);
-    }
-
-    @Override
-    protected int getActionBar()
-    {
-        return R.menu.menu_splash_screen;
     }
 }

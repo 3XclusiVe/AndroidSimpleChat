@@ -7,6 +7,7 @@ import android.widget.ListView;
 import com.example.user.androidsimplechat.R;
 
 import android.os.Bundle;
+import com.example.user.androidsimplechat.ServerClient;
 import com.example.user.androidsimplechat.model.Account;
 import com.example.user.androidsimplechat.model.ChatRoom;
 import com.example.user.androidsimplechat.model.IChatServerResponcesObserver;
@@ -18,7 +19,7 @@ import java.util.*;
 /**
  * Created by user on 07.11.15.
  */
-public class ChatListFrame extends FrameAttachedToMainActivity implements IChatServerResponcesObserver
+public class ChatListFrame extends FrameAttachedToMainActivity
 {
 
     private ChatListAdapter adapter;
@@ -52,11 +53,20 @@ public class ChatListFrame extends FrameAttachedToMainActivity implements IChatS
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                ChatListAdapter.ViewHolder viewHolder = (ChatListAdapter.ViewHolder) view.getTag();
+                ServerClient.currentChatId = viewHolder.chatId;
                 mainActivity.loadFrame(new ChatRoomFrame());
             }
         });
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        responceChatList();
     }
 
     @Override
@@ -68,37 +78,26 @@ public class ChatListFrame extends FrameAttachedToMainActivity implements IChatS
     protected void responceChatList()
     {
         try {
-            mainActivity.getClient().getChatList();
+            ServerClient.instance.getChatList();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void onRegister(String status)
-    {
-
-    }
-
-    @Override
-    public void onAuthorization(String status)
-    {
-        mainActivity.getClient().subscribe(this);
-        responceChatList();
-    }
-
-    @Override
     public void onChannelList(final List<ChatRoom> rooms)
     {
-        Log.d("111", "1111");
         listView.post(new Runnable()
         {
             @Override
             public void run()
             {
                 chatRooms.clear();
-                Log.d("111", rooms.get(0).getDescription());
-                chatRooms.add(rooms.get(0));
+
+                for (ChatRoom room : rooms) {
+                    chatRooms.add(room);
+                }
+
                 adapter.notifyDataSetChanged();
                 listView.invalidateViews();
             }
@@ -107,33 +106,4 @@ public class ChatListFrame extends FrameAttachedToMainActivity implements IChatS
     }
 
 
-    @Override
-    public void onEnterToChannel(List<Message> messages)
-    {
-
-    }
-
-    @Override
-    public void onUserInfo(Account user)
-    {
-
-    }
-
-    @Override
-    public void onUserLeaveChannel(Message message)
-    {
-
-    }
-
-    @Override
-    public void onUserEnterToChannel(Message message)
-    {
-
-    }
-
-    @Override
-    public void onMessage(Message message)
-    {
-
-    }
 }

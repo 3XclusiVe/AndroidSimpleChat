@@ -2,19 +2,22 @@ package com.example.user.androidsimplechat.frames;
 
 import android.os.AsyncTask;
 import com.example.user.androidsimplechat.IFramable;
+import com.example.user.androidsimplechat.ILoadable;
 import com.example.user.androidsimplechat.MainActivity;
+import com.example.user.androidsimplechat.ServerClient;
 import com.example.user.androidsimplechat.model.Client;
+import com.example.user.androidsimplechat.model.IChatServerResponcesObserver;
 
 import java.io.IOException;
 
 /**
  * Created by user on 14.11.15.
  */
-public class RetrieveFeedTask extends AsyncTask<String, Void, Void>
+public class Connection extends AsyncTask<String, Void, Void>
 {
-    private IFramable activity;
+    private ILoadable activity;
 
-    public RetrieveFeedTask(IFramable activity)
+    public Connection(ILoadable activity)
     {
         this.activity = activity;
     }
@@ -22,12 +25,13 @@ public class RetrieveFeedTask extends AsyncTask<String, Void, Void>
     @Override
     protected Void doInBackground(String... params)
     {
-        String login = "mmmalkin007@mail.r";
-        String password = "12345";
-        String nick = "QW12";
+        String login = params[0];
+        String password = params[1];
+        String nick = params[2];
 
         try {
-            activity.setClient(new Client(login, password, nick));
+            ServerClient.instance = new Client(login, password, nick);
+            ServerClient.instance.subscribe((IChatServerResponcesObserver) activity);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,6 +41,5 @@ public class RetrieveFeedTask extends AsyncTask<String, Void, Void>
     @Override
     protected void onPostExecute(Void par)
     {
-        activity.onAuth();
     }
 }

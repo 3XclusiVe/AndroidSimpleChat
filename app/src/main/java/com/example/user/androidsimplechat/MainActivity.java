@@ -14,11 +14,12 @@ import com.example.user.androidsimplechat.frames.SignFrame;
 import com.example.user.androidsimplechat.frames.UserInfoFrame;
 import com.example.user.androidsimplechat.model.Client;
 
+import java.io.IOException;
+
 public class MainActivity extends Activity implements IFramable
 {
     private static Fragment currentFragment;
-    private static Fragment startFragment = new SignFrame();
-    private static Client serverClient;
+    private static Fragment startFragment = new ChatListFrame();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,33 +79,19 @@ public class MainActivity extends Activity implements IFramable
         }
     }
 
-    @Override
-    public Client getClient()
-    {
-        return serverClient;
-    }
-
-    @Override
-    public void setClient(Client client)
-    {
-        serverClient = client;
-    }
-
-    @Override
-    public void onAuth()
-    {
-        ChatListFrame frame;
-        frame = (ChatListFrame) currentFragment;
-        frame.onAuthorization("ok");
-    }
 
     @Override
     public void onBackPressed()
     {
         super.onBackPressed();
-        if ((currentFragment instanceof SignFrame) || (currentFragment instanceof ChatListFrame)) {
+        if ((currentFragment instanceof ChatListFrame)) {
             currentFragment = null;
             this.finish();
+            try {
+                ServerClient.instance.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

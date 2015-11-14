@@ -35,6 +35,7 @@ public class ChatListAdapter extends BaseAdapter
         protected TextView chatName;
         protected TextView onlineUserCount;
         protected TextView chatDescription;
+        public String chatId;
     }
 
     @Override
@@ -65,6 +66,7 @@ public class ChatListAdapter extends BaseAdapter
         viewHolder.chatName.setText(chatRoom.getName());
         viewHolder.onlineUserCount.setText(representOnlineUserCount(chatRoom.getOnlineUserCount()));
         viewHolder.chatDescription.setText(chatRoom.getDescription());
+        viewHolder.chatId = chatRoom.getChatId();
 
         return convertView;
     }

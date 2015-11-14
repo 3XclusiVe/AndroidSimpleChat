@@ -10,10 +10,4 @@ import com.example.user.androidsimplechat.model.Client;
 public interface IFramable
 {
     public void loadFrame(Fragment fragmentToLoad);
-
-    public Client getClient();
-
-    public void setClient(Client client);
-
-    public void onAuth();
 }
