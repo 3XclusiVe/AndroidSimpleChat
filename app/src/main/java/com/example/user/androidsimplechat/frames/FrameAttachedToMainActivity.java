@@ -1,6 +1,8 @@
 package com.example.user.androidsimplechat.frames;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
+import android.content.res.Configuration;
 import android.view.*;
 import com.example.user.androidsimplechat.IFramable;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ public abstract class FrameAttachedToMainActivity extends Fragment implements IC
     protected MainActivity mainActivity;
     private int mActionBar;
     private String mActionBarTitle;
+    private ProgressDialog progressDialog;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -61,6 +64,22 @@ public abstract class FrameAttachedToMainActivity extends Fragment implements IC
     protected int getActionBar()
     {
         return R.menu.fragment_menu;
+    }
+
+    public void finishLoading()
+    {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    public void startLoad()
+    {
+        progressDialog = new ProgressDialog(mainActivity);
+        progressDialog.setMessage("Connecting");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
     }
 
     @Override

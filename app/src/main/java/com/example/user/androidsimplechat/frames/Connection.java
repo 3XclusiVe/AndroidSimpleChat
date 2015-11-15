@@ -23,17 +23,46 @@ public class Connection extends AsyncTask<String, Void, Void>
     }
 
     @Override
+    protected void onPreExecute()
+    {
+        activity.startLoad();
+    }
+
+
+    @Override
     protected Void doInBackground(String... params)
     {
-        String login = params[0];
-        String password = params[1];
-        String nick = params[2];
+        Client client = ServerClient.instance;
+        if (params.length == 2) {
+            String login = params[0];
+            String password = params[1];
 
-        try {
-            ServerClient.instance = new Client(login, password, nick);
-            ServerClient.instance.subscribe((IChatServerResponcesObserver) activity);
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                if (client != null) {
+                    client.disconnect();
+                }
+
+                ServerClient.instance = new Client(login, password);
+                ServerClient.instance.subscribe((IChatServerResponcesObserver) activity);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            String login = params[0];
+            String password = params[1];
+            String nick = params[2];
+
+            try {
+                if (client != null) {
+                    client.disconnect();
+                }
+
+                ServerClient.instance = new Client(login, password, nick);
+                ServerClient.instance.subscribe((IChatServerResponcesObserver) activity);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -41,5 +70,6 @@ public class Connection extends AsyncTask<String, Void, Void>
     @Override
     protected void onPostExecute(Void par)
     {
+        //activity.finishLoading();
     }
 }

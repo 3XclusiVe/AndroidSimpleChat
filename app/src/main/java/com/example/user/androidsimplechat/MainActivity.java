@@ -27,7 +27,7 @@ public class MainActivity extends Activity implements IFramable
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
+        if (currentFragment == null) {
             loadFrame(startFragment);
         }
     }
@@ -83,15 +83,24 @@ public class MainActivity extends Activity implements IFramable
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
-        if ((currentFragment instanceof ChatListFrame)) {
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+
             currentFragment = null;
-            this.finish();
+
             try {
                 ServerClient.instance.disconnect();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+            this.finish();
+
+        } else {
+            getFragmentManager().popBackStack();
         }
     }
 }

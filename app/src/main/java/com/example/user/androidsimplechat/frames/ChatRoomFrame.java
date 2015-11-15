@@ -25,17 +25,18 @@ import com.example.user.androidsimplechat.model.Message;
 public class ChatRoomFrame extends FrameAttachedToMainActivity
 {
 
-    private Button sendButton;
-    private EditText inputMessage;
-    private ListView listView;
-    private List<Message> messages;
-    private ChatRoomAdapter adapter;
+    private static Button sendButton;
+    private static EditText inputMessage;
+    private static ListView listView;
+    private static List<Message> messages;
+    private static ChatRoomAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.chat_room_frame, null);
+
 
         sendButton = (Button) v.findViewById(R.id.btnSend);
         inputMessage = (EditText) v.findViewById(R.id.inputMsg);
@@ -45,17 +46,24 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
         listView = (ListView) v.findViewById(R.id.chat_room_messages);
 
         messages = new ArrayList<Message>();
-        for (int i = 0; i < 10; i++) {
-            messages.add(new Message("hello can you see my message " +
-                    "gsdjnsdjngslndgsdnglsdngksdngjksndglksndglksndglksndglksdngslkgn" +
-                    " ", "aaa", "bot"));
-        }
+
 
         // создаем адаптер
         adapter = new ChatRoomAdapter(getActivity(), messages);
 
+
         // присваиваем адаптер списку
         listView.setAdapter(adapter);
+
+
+        return v;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
 
         sendButton.setOnClickListener(new View.OnClickListener()
         {
@@ -75,14 +83,6 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
             }
         });
 
-        return v;
-    }
-
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
         responceLastMessages();
     }
 
@@ -129,12 +129,6 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
                 listView.invalidateViews();
             }
         });
-    }
-
-    @Override
-    public void onUserInfo(Account user)
-    {
-
     }
 
     @Override

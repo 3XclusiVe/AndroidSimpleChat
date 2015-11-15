@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.provider.ContactsContract;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import com.example.user.androidsimplechat.ILoadable;
 import com.example.user.androidsimplechat.R;
 
@@ -17,11 +18,16 @@ import android.view.ViewGroup;
  */
 public class SignFrame extends Fragment
 {
+    private static Connection connectionTask;
+    private static boolean wantToConnect = false;
+
     private ILoadable mainActivity;
     Button button;
     EditText loginEditText;
     EditText passwordEditText;
     EditText nicknameEditText;
+    TextView errorMessage;
+    String error;
 
 
     @Override
@@ -38,6 +44,9 @@ public class SignFrame extends Fragment
         loginEditText = (EditText) v.findViewById(R.id.login);
         passwordEditText = (EditText) v.findViewById(R.id.password);
         nicknameEditText = (EditText) v.findViewById(R.id.nickname);
+        errorMessage = (TextView) v.findViewById(R.id.error);
+
+        errorMessage.setText(error);
 
         loginEditText.setText("mmmalkin007@mail.r");
         passwordEditText.setText("12345");
@@ -45,6 +54,7 @@ public class SignFrame extends Fragment
 
         return v;
     }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
@@ -61,11 +71,27 @@ public class SignFrame extends Fragment
                                           String password = passwordEditText.getText().toString();
                                           String nick = nicknameEditText.getText().toString();
 
-                                          Connection connection = new Connection(mainActivity);
-                                          connection.execute(login, password, nick);
+
+                                          connectionTask = new Connection(mainActivity);
+                                          connectionTask.execute(login, password, nick);
+
                                       }
                                   }
 
         );
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        this.error = "";
+        Bundle args = getArguments();
+        if (args != null) {
+            String error = args.getString("error");
+            if (error != null) {
+                this.error = error;
+            }
+        }
     }
 }

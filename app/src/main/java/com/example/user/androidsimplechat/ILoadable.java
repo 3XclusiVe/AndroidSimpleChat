@@ -1,5 +1,6 @@
 package com.example.user.androidsimplechat;
 
+import android.app.ProgressDialog;
 import com.example.user.androidsimplechat.model.Client;
 
 /**
@@ -11,6 +12,10 @@ public interface ILoadable
 
     void onSuccessToConnect();
 
-    void onFailToCoonnect();
+    void onFailToCoonnect(String reason);
+
+    void finishLoading();
+
+    void startLoad();
 
 }

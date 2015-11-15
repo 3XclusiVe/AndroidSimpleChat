@@ -1,6 +1,7 @@
 package com.example.user.androidsimplechat.model;
 
 import android.util.Log;
+import com.example.user.androidsimplechat.ServerClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -168,6 +169,20 @@ public class Client implements ICallbackable, Serializable
         return error;
     }
 
+    private String getErrorDescrition(JSONObject responce)
+    {
+
+        String error = new String();
+
+        try {
+            error = responce.getString("error");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return error;
+    }
+
     @Override
     public void onRegister(JSONObject responce)
     {
@@ -184,18 +199,10 @@ public class Client implements ICallbackable, Serializable
                 }
                 break;
 
-            case Status.NickAlreadyWasUsed:
-                try {
-                    resetConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-
             default:
+                String errorDescription = getErrorDescrition(responce);
                 for (IChatServerResponcesObserver observer : observers) {
-                    observer.onRegister("error");
+                    observer.onRegister(errorDescription);
                 }
                 break;
         }
@@ -218,25 +225,10 @@ public class Client implements ICallbackable, Serializable
                 }
                 break;
 
-
-
-
-            /*
-            case Status.InvalidLoginOrPassword:
-                throw new IllegalArgumentException("InvalidLoginOrPassword");
-
-            case Status.NeedToRegister:
-                try {
-                    socketClient.sendRequest(Protocol.registration(selfLogin, selfPassword, selfNickname));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            */
-
             default:
+                String errorDecription = getErrorDescrition(responce);
                 for (IChatServerResponcesObserver observer : observers) {
-                    observer.onAuthorization("error");
+                    observer.onAuthorization(errorDecription);
                 }
                 break;
         }

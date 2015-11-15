@@ -3,18 +3,28 @@ package com.example.user.androidsimplechat;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import com.example.user.androidsimplechat.frames.ChatListFrame;
+import com.example.user.androidsimplechat.frames.Connection;
 import com.example.user.androidsimplechat.frames.SignFrame;
 import com.example.user.androidsimplechat.model.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SplashScreen extends Activity implements ILoadable, IChatServerResponcesObserver
 {
     private static Fragment currentFragment = null;
     private static Class<?> nextActivityToLoad = null;
+
+    private ProgressDialog progressDialog;
+
+    static String login = "mmmalkin007@mail.r";
+    static String pass = "123456";
+    static String nick = "QW12";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,7 +35,10 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         if (nextActivityToLoad == null) {
             nextActivityToLoad = MainActivity.class;
         }
-        loadFrame(new SignFrame());
+        if (savedInstanceState == null) {
+            Connection connection = new Connection(this);
+            connection.execute(login, pass);
+        }
 
     }
 
@@ -40,8 +53,26 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
-        this.finish();
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+
+            currentFragment = null;
+
+            try {
+                ServerClient.instance.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+            this.finish();
+
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
 
     @Override
@@ -57,13 +88,33 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
     @Override
     public void onSuccessToConnect()
     {
+        finishLoading();
         loadNextActivity();
     }
 
     @Override
-    public void onFailToCoonnect()
+    public void onFailToCoonnect(String reason)
     {
-        loadFrame(new SignFrame());
+        finishLoading();
+        loadFrame(reCreate(reason));
+    }
+
+    @Override
+    public void finishLoading()
+    {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void startLoad()
+    {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Connecting");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
     }
 
 
@@ -72,9 +123,6 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment, fragmentToLoad);
-        if (currentFragment != null) {
-            ft.addToBackStack(null);
-        }
         ft.commit();
         this.invalidateOptionsMenu();
         currentFragment = fragmentToLoad;
@@ -84,7 +132,11 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
     @Override
     public void onRegister(String status)
     {
-
+        if (status.equals("OK")) {
+            onSuccessToConnect();
+        } else {
+            onFailToCoonnect(status);
+        }
     }
 
     @Override
@@ -93,8 +145,19 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         if (status.equals("OK")) {
             onSuccessToConnect();
         } else {
-            onFailToCoonnect();
+            onFailToCoonnect(status);
         }
+    }
+
+    private Fragment reCreate(String errorDescription)
+    {
+        SignFrame signFragment = new SignFrame();
+
+        Bundle args = new Bundle();
+        args.putString("error", errorDescription);
+        signFragment.setArguments(args);
+
+        return signFragment;
     }
 
     @Override

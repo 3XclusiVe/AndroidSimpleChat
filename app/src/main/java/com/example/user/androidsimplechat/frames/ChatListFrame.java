@@ -22,9 +22,9 @@ import java.util.*;
 public class ChatListFrame extends FrameAttachedToMainActivity
 {
 
-    private ChatListAdapter adapter;
-    private List<ChatRoom> chatRooms;
-    private ListView listView;
+    private static ChatListAdapter adapter;
+    private static List<ChatRoom> chatRooms;
+    private static ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -36,17 +36,22 @@ public class ChatListFrame extends FrameAttachedToMainActivity
         // находим список
         listView = (ListView) v.findViewById(R.id.chat_list);
 
+        //if (chatRooms == null) {
         chatRooms = new ArrayList<ChatRoom>();
-
-        for (int i = 0; i < 10; i++) {
-            chatRooms.add(new ChatRoom("name", 10, "chat", "c"));
-        }
-
+        //}
         // создаем адаптер
         adapter = new ChatListAdapter(getActivity(), R.layout.chat_list_element, chatRooms);
 
         // присваиваем адаптер списку
         listView.setAdapter(adapter);
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -59,13 +64,6 @@ public class ChatListFrame extends FrameAttachedToMainActivity
             }
         });
 
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
         responceChatList();
     }
 
@@ -97,7 +95,6 @@ public class ChatListFrame extends FrameAttachedToMainActivity
                 for (ChatRoom room : rooms) {
                     chatRooms.add(room);
                 }
-
                 adapter.notifyDataSetChanged();
                 listView.invalidateViews();
             }

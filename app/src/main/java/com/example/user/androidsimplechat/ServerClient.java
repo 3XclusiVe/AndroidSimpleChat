@@ -1,10 +1,12 @@
 package com.example.user.androidsimplechat;
 
+import com.example.user.androidsimplechat.model.Client;
+
 /**
  * Created by user on 14.11.15.
  */
 public class ServerClient
 {
-    public static com.example.user.androidsimplechat.model.Client instance;
+    public static Client instance;
     public static String currentChatId;
 }

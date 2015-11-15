@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -20,6 +21,7 @@ public class SocketClient
     public ICallbackable Client;
     private boolean connected;
     private boolean writeLogs = true;
+    private int connectionTimeOut = 20;
 
     public SocketClient(String hostname, int port, ICallbackable Client)
     {
@@ -31,6 +33,9 @@ public class SocketClient
     public void connect() throws UnknownHostException, IOException
     {
         log("Attempting to connect to " + hostname + ":" + port);
+        //socketClient = new Socket();
+        //socketClient.connect(new InetSocketAddress(hostname, port),
+        //  connectionTimeOut);
         socketClient = new Socket(hostname, port);
         connected = true;
         log("Connection Established");
@@ -41,6 +46,7 @@ public class SocketClient
     {
         connected = false;
         socketClient.close();
+        log("Connection Closed");
     }
 
     private void submit()
