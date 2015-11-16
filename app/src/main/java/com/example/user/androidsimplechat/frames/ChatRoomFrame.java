@@ -50,7 +50,7 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
 
 
         // создаем адаптер
-        adapter = new ChatRoomAdapter(getActivity(), messages);
+        adapter = new ChatRoomAdapter(getActivity(), R.layout.chatroom_message, messages);
 
 
         // присваиваем адаптер списку
@@ -89,9 +89,11 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                ChatListAdapter.ViewHolder viewHolder = (ChatListAdapter.ViewHolder) view.getTag();
-                ServerClient.currentChatId = viewHolder.chatId;
-                mainActivity.loadFrame(new ChatRoomFrame());
+                ChatRoomAdapter.ViewHolder viewHolder = (ChatRoomAdapter.ViewHolder) view.getTag();
+
+                ServerClient.userId = viewHolder.getUserId();
+
+                mainActivity.loadFrame(new UserInfoFrame());
             }
         });
 

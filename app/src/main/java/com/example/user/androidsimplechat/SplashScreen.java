@@ -130,7 +130,7 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
     public void onRegister(String status)
     {
         if (status.equals("OK")) {
-            onSuccessToConnect();
+
         } else {
             onFailToConnect(status);
         }

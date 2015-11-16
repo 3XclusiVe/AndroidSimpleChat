@@ -9,4 +9,5 @@ public class ServerClient
 {
     public static Client instance;
     public static String currentChatId;
+    public static String userId;
 }

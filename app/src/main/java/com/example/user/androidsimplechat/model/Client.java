@@ -127,6 +127,7 @@ public class Client implements ICallbackable, Serializable
         try {
             userId = responceData.getString("cid");
         } catch (JSONException e) {
+            print(responceData.toString());
             print("unexpected response from the server");
         }
         return userId;
@@ -138,23 +139,10 @@ public class Client implements ICallbackable, Serializable
         try {
             SessionId = responceData.getString("sid");
         } catch (JSONException e) {
+            print(responceData.toString());
             print("unexpected response from the server");
         }
         return SessionId;
-    }
-
-    private JSONObject getResponceData(JSONObject responce)
-    {
-        final String data = "data";
-        JSONObject responceData = null;
-
-        try {
-            responceData = responce.getJSONObject(data);
-        } catch (JSONException e) {
-            print("unexpected response from the server");
-        }
-
-        return responceData;
     }
 
     private int getReport(JSONObject responce)
@@ -191,9 +179,6 @@ public class Client implements ICallbackable, Serializable
         switch (error) {
 
             case Status.OK:
-                selfSessionId = getSessionId(responce);
-                selfUserId = getUserId(responce);
-
                 for (IChatServerResponcesObserver observer : observers) {
                     observer.onRegister("OK");
                 }
