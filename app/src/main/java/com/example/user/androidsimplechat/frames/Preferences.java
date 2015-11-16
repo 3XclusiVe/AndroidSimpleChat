@@ -16,6 +16,7 @@ public class Preferences extends PreferenceFragment
     {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -24,6 +25,7 @@ public class Preferences extends PreferenceFragment
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.settings_menu, menu);
+        getActivity().setTitle("Settings");
     }
 
 }

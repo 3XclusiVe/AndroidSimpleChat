@@ -76,7 +76,7 @@ public abstract class FrameAttachedToMainActivity extends Fragment implements IC
     public void startLoad()
     {
         progressDialog = new ProgressDialog(mainActivity);
-        progressDialog.setMessage("Connecting");
+        progressDialog.setMessage("Loading data");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

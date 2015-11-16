@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import com.example.user.androidsimplechat.frames.ChatListFrame;
 import com.example.user.androidsimplechat.frames.Connection;
 import com.example.user.androidsimplechat.frames.SignFrame;
 import com.example.user.androidsimplechat.model.*;
@@ -20,10 +19,10 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
     private static Fragment currentFragment = null;
     private static Class<?> nextActivityToLoad = null;
 
-    private ProgressDialog progressDialog;
+    private volatile ProgressDialog progressDialog;
 
     static String login = "mmmalkin007@mail.r";
-    static String pass = "123456";
+    static String pass = "123465";
     static String nick = "QW12";
 
     @Override

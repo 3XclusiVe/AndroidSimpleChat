@@ -99,6 +99,7 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
 
     private void responceLastMessages()
     {
+        startLoad();
         try {
             ServerClient.instance.enterRoom(ServerClient.currentChatId);
         } catch (IOException e) {
@@ -114,6 +115,7 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
     @Override
     public void onEnterToChannel(final List<Message> inputMessages)
     {
+        finishLoading();
         listView.post(new Runnable()
         {
             @Override

@@ -75,6 +75,7 @@ public class ChatListFrame extends FrameAttachedToMainActivity
 
     protected void responceChatList()
     {
+        startLoad();
         try {
             ServerClient.instance.getChatList();
         } catch (IOException e) {
@@ -85,6 +86,7 @@ public class ChatListFrame extends FrameAttachedToMainActivity
     @Override
     public void onChannelList(final List<ChatRoom> rooms)
     {
+        finishLoading();
         listView.post(new Runnable()
         {
             @Override

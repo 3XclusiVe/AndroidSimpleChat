@@ -18,4 +18,7 @@
     <string name="title_chat_room">Chat Room</string>
     <string name="title_sign">Sign</string>
 
+    <string name="btn_authorization">Sign In</string>
+    <string name="btn_registration">Sign Up</string>
+
 </resources>

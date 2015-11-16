@@ -262,10 +262,6 @@ public class Client implements ICallbackable, Serializable
                         observer.onChannelList(chatList);
                     }
 
-                    for (ChatRoom room : chatList) {
-                        room.print();
-                    }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -291,6 +287,26 @@ public class Client implements ICallbackable, Serializable
                     print("users: " + users.toString());
                     print("messages: " + messages.toString());
 
+                    List<Message> lastMessages = new ArrayList<Message>();
+
+                    int lastMessagesCount = messages.length();
+                    for (int i = 0; i < lastMessagesCount; i++) {
+                        JSONObject jsMessage = messages.getJSONObject(i);
+
+                        String userId = jsMessage.getString("uid");
+                        String nick = jsMessage.getString("nick");
+                        String content = jsMessage.getString("body");
+
+                        Message message = new Message(content, userId, nick);
+
+                        lastMessages.add(message);
+
+                    }
+
+                    for (IChatServerResponcesObserver observer : observers) {
+                        observer.onEnterToChannel(lastMessages);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -313,6 +329,11 @@ public class Client implements ICallbackable, Serializable
                     String status = responce.getString("user_status");
 
                     Account user = new Account(nickName, status);
+
+                    for (IChatServerResponcesObserver observer : observers) {
+                        observer.onUserInfo(user);
+                    }
+
                     user.print();
                 } catch (JSONException e) {
                     e.printStackTrace();
