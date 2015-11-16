@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
               android:paddingBottom="5dp"
               android:paddingTop="5dp"
               android:paddingLeft="10dp">
 
-    <TextView
-            android:id="@+id/lblMsgFrom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:textColor="@color/lblFromName"
-            android:textStyle="italic"
-            android:padding="5dp" android:text="dad"/>
 
-    <TextView
-            android:id="@+id/txtMsg"
+    <ImageView
+            android:id="@+id/chat_icon"
+            android:src="@drawable/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:layout_marginRight="80dp"
-            android:textColor="@color/title_gray"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:background="@drawable/message_background"
-            android:text="message "/>
+            android:cropToPadding="false" android:layout_gravity="bottom"/>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:paddingBottom="5dp"
+                  android:paddingTop="5dp"
+                  android:paddingLeft="10dp">
+
+        <TextView
+                android:id="@+id/lblMsgFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="@color/lblFromName"
+                android:textStyle="italic"
+                android:padding="5dp" android:text="dad"/>
+
+        <TextView
+                android:id="@+id/txtMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginRight="80dp"
+                android:textColor="@color/title_gray"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/message_background"
+                android:text="message sgslkglksjsh shgsh jlhsalk jgshg;jshg lsaj gsh gjklhs ;kghsajghskjhg jsh ;kahgkhh sgkjah
+                sbg jsg
+                s gh sg
+                s kgjb"/>
+    </LinearLayout>
 
 </LinearLayout>

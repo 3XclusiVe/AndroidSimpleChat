@@ -44,15 +44,6 @@ public class Client implements ICallbackable, Serializable
         observers = new ArrayList<IChatServerResponcesObserver>();
 
         socketClient.sendRequest(Protocol.registration(login, password, nickname));
-
-        /**
-         synchronized (lock) {
-         try {
-         lock.wait();
-         } catch (InterruptedException e) {
-         e.printStackTrace();
-         }
-         }**/
     }
 
     public Client(String login, String password) throws IOException
@@ -68,11 +59,6 @@ public class Client implements ICallbackable, Serializable
         observers = new ArrayList<IChatServerResponcesObserver>();
 
         socketClient.sendRequest(Protocol.authorization(login, password));
-    }
-
-    private void resetConnection() throws IOException
-    {
-        socketClient.sendRequest(Protocol.authorization(selfLogin, selfPassword));
     }
 
     public void subscribe(IChatServerResponcesObserver observer)

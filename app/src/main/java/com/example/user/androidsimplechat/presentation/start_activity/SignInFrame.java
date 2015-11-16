@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.user.androidsimplechat.R;
 
 /**
  * Created by user on 07.11.15.
@@ -17,7 +18,7 @@ public class SignInFrame extends FragmentAtachedToSplashScreen
     {
         View v = super.onCreateView(inflater, container, savedInstanceState);
 
-        changePerspectiveButton.setText("Registration");
+        changePerspectiveButton.setText(R.string.go_registration_button_text);
         nickNameEditText.setVisibility(View.INVISIBLE);
 
         return v;

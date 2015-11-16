@@ -35,7 +35,7 @@ public abstract class FragmentAtachedToSplashScreen extends Fragment
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.sign_frame, null);
+        View v = inflater.inflate(R.layout.login_fragment, null);
 
         if (mainActivity == null) {
             mainActivity = (ILoadable) getActivity();

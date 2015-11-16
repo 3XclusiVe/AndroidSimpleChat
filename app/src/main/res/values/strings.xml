@@ -5,12 +5,7 @@
     <string name="action_account">Account</string>
 
     <string name="title_activity_main">MainActivity</string>
-    <string name="title">(Android WebSockets Chat App)</string>
-    <string name="author_name">By Ravi Tamada</string>
-    <string name="author_url">www.androidhive.info</string>
     <string name="enter_name">Enter your name</string>
-    <string name="btn_sign">Sign</string>
-    <string name="btn_join">JOIN</string>
     <string name="btn_send">Send</string>
 
     <string name="title_chat_list">Chat List</string>
@@ -20,5 +15,17 @@
 
     <string name="btn_authorization">Sign In</string>
     <string name="btn_registration">Sign Up</string>
+
+    <!-- Login Fragment -->
+    <string name="login_edittext_hint">login</string>
+    <string name="password_edittext_hint">password</string>
+    <string name="nickname_edittext_hint">nickname</string>
+    <string name="login_button_text">Log In</string>
+    <string name="go_registration_button_text">Not a member? Sign up now.
+    </string>
+    <string name="go_authorization_button_text">Already have an account? Sign
+        in.
+    </string>
+
 
 </resources>

@@ -70,9 +70,11 @@ public class MainActivity extends Activity implements IFramable
         if (fragmentToLoad != currentFragment) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, fragmentToLoad);
+
             if (currentFragment != null) {
                 ft.addToBackStack(null);
             }
+
             ft.commit();
             this.invalidateOptionsMenu();
             currentFragment = fragmentToLoad;

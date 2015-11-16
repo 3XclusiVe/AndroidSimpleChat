@@ -69,7 +69,7 @@ public class ChatRoomAdapter extends BaseAdapter
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             if (position % 2 == 0) {
-                convertView = inflater.inflate(R.layout.chatroom_self_message, null);
+                convertView = inflater.inflate(R.layout.chatroom_message, null);
             } else {
                 convertView = inflater.inflate(R.layout.chatroom_message, null);
             }

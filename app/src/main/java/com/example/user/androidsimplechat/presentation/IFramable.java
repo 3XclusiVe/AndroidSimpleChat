@@ -8,5 +8,5 @@ import android.app.Fragment;
  */
 public interface IFramable
 {
-    public void loadFrame(Fragment fragmentToLoad);
+    void loadFrame(Fragment fragmentToLoad);
 }
