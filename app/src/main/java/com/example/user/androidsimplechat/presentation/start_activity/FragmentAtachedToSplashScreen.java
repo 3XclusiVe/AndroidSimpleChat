@@ -1,4 +1,4 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation.start_activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.example.user.androidsimplechat.ILoadable;
+import com.example.user.androidsimplechat.presentation.ILoadable;
 import com.example.user.androidsimplechat.R;
+import com.example.user.androidsimplechat.presentation.Connection;
 
 /**
  * Created by user on 16.11.15.

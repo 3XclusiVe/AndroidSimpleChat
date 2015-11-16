@@ -1,6 +1,5 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation.main_activity.frames;
 
-import android.widget.EditText;
 import android.widget.TextView;
 import com.example.user.androidsimplechat.R;
 
@@ -8,8 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.user.androidsimplechat.ServerClient;
+import com.example.user.androidsimplechat.presentation.ServerClient;
 import com.example.user.androidsimplechat.model.Account;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.base.FrameAttachedToMainActivity;
 
 import java.io.IOException;
 

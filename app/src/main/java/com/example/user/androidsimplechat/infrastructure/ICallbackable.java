@@ -1,4 +1,4 @@
-package com.example.user.androidsimplechat.model;
+package com.example.user.androidsimplechat.infrastructure;
 
 import org.json.JSONObject;
 

@@ -1,8 +1,7 @@
-package com.example.user.androidsimplechat;
+package com.example.user.androidsimplechat.presentation;
 
 
 import android.app.Fragment;
-import com.example.user.androidsimplechat.model.Client;
 
 /**
  * Created by user on 07.11.15.

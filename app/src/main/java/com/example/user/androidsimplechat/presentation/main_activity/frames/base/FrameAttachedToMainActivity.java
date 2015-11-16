@@ -1,17 +1,15 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation.main_activity.frames.base;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.res.Configuration;
 import android.view.*;
-import com.example.user.androidsimplechat.IFramable;
 import android.os.Bundle;
-import com.example.user.androidsimplechat.MainActivity;
+import com.example.user.androidsimplechat.presentation.main_activity.MainActivity;
 import com.example.user.androidsimplechat.R;
-import com.example.user.androidsimplechat.ServerClient;
+import com.example.user.androidsimplechat.presentation.ServerClient;
 import com.example.user.androidsimplechat.model.Account;
 import com.example.user.androidsimplechat.model.ChatRoom;
-import com.example.user.androidsimplechat.model.IChatServerResponcesObserver;
+import com.example.user.androidsimplechat.infrastructure.IChatServerResponcesObserver;
 import com.example.user.androidsimplechat.model.Message;
 
 import java.util.List;

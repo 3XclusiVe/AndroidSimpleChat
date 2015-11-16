@@ -1,6 +1,6 @@
-package com.example.user.androidsimplechat;
+package com.example.user.androidsimplechat.presentation;
 
-import com.example.user.androidsimplechat.model.Client;
+import com.example.user.androidsimplechat.infrastructure.Client;
 
 /**
  * Created by user on 14.11.15.

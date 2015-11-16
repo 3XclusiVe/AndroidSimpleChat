@@ -1,4 +1,8 @@
-package com.example.user.androidsimplechat.model;
+package com.example.user.androidsimplechat.infrastructure;
+
+import com.example.user.androidsimplechat.model.Account;
+import com.example.user.androidsimplechat.model.ChatRoom;
+import com.example.user.androidsimplechat.model.Message;
 
 import java.util.List;
 

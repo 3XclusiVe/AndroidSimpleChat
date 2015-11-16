@@ -1,4 +1,4 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation.main_activity.frames.chat_list_frame;
 
 import android.content.Context;
 import android.view.LayoutInflater;

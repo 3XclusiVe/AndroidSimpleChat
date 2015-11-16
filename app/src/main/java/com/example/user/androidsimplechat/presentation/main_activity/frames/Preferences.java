@@ -1,4 +1,4 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation.main_activity.frames;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

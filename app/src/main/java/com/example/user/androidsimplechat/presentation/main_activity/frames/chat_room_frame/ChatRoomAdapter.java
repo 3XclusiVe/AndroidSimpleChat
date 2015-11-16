@@ -1,4 +1,4 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation.main_activity.frames.chat_room_frame;
 
 /**
  * Created by user on 09.11.15.
@@ -6,7 +6,6 @@ package com.example.user.androidsimplechat.frames;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.user.androidsimplechat.R;
 import com.example.user.androidsimplechat.model.Message;
-import org.w3c.dom.Text;
 
 public class ChatRoomAdapter extends BaseAdapter
 {

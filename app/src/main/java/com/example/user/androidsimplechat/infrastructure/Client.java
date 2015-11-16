@@ -1,7 +1,7 @@
-package com.example.user.androidsimplechat.model;
+package com.example.user.androidsimplechat.infrastructure;
 
 import android.util.Log;
-import com.example.user.androidsimplechat.ServerClient;
+import com.example.user.androidsimplechat.model.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -358,7 +358,7 @@ public class Client implements ICallbackable, Serializable
             message.print();
 
             for (IChatServerResponcesObserver observer : observers) {
-                observer.onMessage(message);
+                observer.onUserLeaveChannel(message);
             }
 
         } catch (JSONException e) {

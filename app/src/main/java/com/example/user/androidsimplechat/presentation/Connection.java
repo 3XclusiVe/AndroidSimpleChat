@@ -1,12 +1,10 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation;
 
 import android.os.AsyncTask;
-import com.example.user.androidsimplechat.IFramable;
-import com.example.user.androidsimplechat.ILoadable;
-import com.example.user.androidsimplechat.MainActivity;
-import com.example.user.androidsimplechat.ServerClient;
-import com.example.user.androidsimplechat.model.Client;
-import com.example.user.androidsimplechat.model.IChatServerResponcesObserver;
+import com.example.user.androidsimplechat.presentation.ILoadable;
+import com.example.user.androidsimplechat.presentation.ServerClient;
+import com.example.user.androidsimplechat.infrastructure.Client;
+import com.example.user.androidsimplechat.infrastructure.IChatServerResponcesObserver;
 
 import java.io.IOException;
 

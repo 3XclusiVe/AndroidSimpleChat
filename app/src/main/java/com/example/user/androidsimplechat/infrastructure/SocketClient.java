@@ -1,12 +1,10 @@
-package com.example.user.androidsimplechat.model;
+package com.example.user.androidsimplechat.infrastructure;
 
 import android.util.Log;
-import com.example.user.androidsimplechat.model.ICallbackable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -21,7 +19,6 @@ public class SocketClient
     public ICallbackable Client;
     private boolean connected;
     private boolean writeLogs = true;
-    private int connectionTimeOut = 20;
 
     public SocketClient(String hostname, int port, ICallbackable Client)
     {
@@ -33,9 +30,6 @@ public class SocketClient
     public void connect() throws UnknownHostException, IOException
     {
         log("Attempting to connect to " + hostname + ":" + port);
-        //socketClient = new Socket();
-        //socketClient.connect(new InetSocketAddress(hostname, port),
-        //  connectionTimeOut);
         socketClient = new Socket(hostname, port);
         connected = true;
         log("Connection Established");
@@ -93,7 +87,7 @@ public class SocketClient
         try {
             JSONObject serverMessage = new JSONObject(incomingMessage);
 
-            String currentAction = serverMessage.getString("action");
+            String currentAction = serverMessage.getString(action);
 
             if (currentAction.equals(Protocol.Actions.Registration)) {
                 JSONObject serverResponce = getResponceData(serverMessage);

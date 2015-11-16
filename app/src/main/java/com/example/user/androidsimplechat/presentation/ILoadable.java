@@ -1,8 +1,6 @@
-package com.example.user.androidsimplechat;
+package com.example.user.androidsimplechat.presentation;
 
 import android.app.Fragment;
-import android.app.ProgressDialog;
-import com.example.user.androidsimplechat.model.Client;
 
 /**
  * Created by user on 14.11.15.

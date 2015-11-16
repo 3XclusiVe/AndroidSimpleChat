@@ -1,4 +1,4 @@
-package com.example.user.androidsimplechat;
+package com.example.user.androidsimplechat.presentation.main_activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -7,9 +7,12 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.example.user.androidsimplechat.frames.ChatListFrame;
-import com.example.user.androidsimplechat.frames.Preferences;
-import com.example.user.androidsimplechat.frames.UserInfoFrame;
+import com.example.user.androidsimplechat.R;
+import com.example.user.androidsimplechat.presentation.IFramable;
+import com.example.user.androidsimplechat.presentation.ServerClient;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.chat_list_frame.ChatListFrame;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.Preferences;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.UserInfoFrame;
 
 import java.io.IOException;
 

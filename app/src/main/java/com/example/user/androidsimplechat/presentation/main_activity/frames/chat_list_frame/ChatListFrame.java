@@ -1,17 +1,15 @@
-package com.example.user.androidsimplechat.frames;
+package com.example.user.androidsimplechat.presentation.main_activity.frames.chat_list_frame;
 
-import android.util.Log;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.user.androidsimplechat.R;
 
 import android.os.Bundle;
-import com.example.user.androidsimplechat.ServerClient;
-import com.example.user.androidsimplechat.model.Account;
+import com.example.user.androidsimplechat.presentation.ServerClient;
 import com.example.user.androidsimplechat.model.ChatRoom;
-import com.example.user.androidsimplechat.model.IChatServerResponcesObserver;
-import com.example.user.androidsimplechat.model.Message;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.chat_room_frame.ChatRoomFrame;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.base.FrameAttachedToMainActivity;
 
 import java.io.IOException;
 import java.util.*;

@@ -1,4 +1,4 @@
-package com.example.user.androidsimplechat;
+package com.example.user.androidsimplechat.presentation.start_activity;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,9 +7,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import com.example.user.androidsimplechat.frames.Connection;
-import com.example.user.androidsimplechat.frames.SignInFrame;
+import com.example.user.androidsimplechat.R;
+import com.example.user.androidsimplechat.presentation.ILoadable;
+import com.example.user.androidsimplechat.presentation.ServerClient;
+import com.example.user.androidsimplechat.presentation.Connection;
+import com.example.user.androidsimplechat.infrastructure.IChatServerResponcesObserver;
 import com.example.user.androidsimplechat.model.*;
+import com.example.user.androidsimplechat.presentation.main_activity.MainActivity;
 
 import java.io.IOException;
 import java.util.List;
