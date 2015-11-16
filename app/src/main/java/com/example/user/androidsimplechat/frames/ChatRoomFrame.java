@@ -1,5 +1,6 @@
 package com.example.user.androidsimplechat.frames;
 
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -80,6 +81,17 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
 
                 // Clearing the input filed once message was sent
                 inputMessage.setText("");
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                ChatListAdapter.ViewHolder viewHolder = (ChatListAdapter.ViewHolder) view.getTag();
+                ServerClient.currentChatId = viewHolder.chatId;
+                mainActivity.loadFrame(new ChatRoomFrame());
             }
         });
 

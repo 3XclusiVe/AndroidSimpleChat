@@ -5,14 +5,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.user.androidsimplechat.frames.ChatListFrame;
 import com.example.user.androidsimplechat.frames.Preferences;
-import com.example.user.androidsimplechat.frames.SignFrame;
 import com.example.user.androidsimplechat.frames.UserInfoFrame;
-import com.example.user.androidsimplechat.model.Client;
 
 import java.io.IOException;
 

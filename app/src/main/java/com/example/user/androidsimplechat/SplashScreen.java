@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import com.example.user.androidsimplechat.frames.Connection;
-import com.example.user.androidsimplechat.frames.SignFrame;
+import com.example.user.androidsimplechat.frames.SignInFrame;
 import com.example.user.androidsimplechat.model.*;
 
 import java.io.IOException;
@@ -74,8 +74,8 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         }
     }
 
-    @Override
-    public void loadNextActivity()
+
+    private void loadNextActivity()
     {
         Intent intent = new Intent(this, nextActivityToLoad);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -84,15 +84,13 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         this.finish();
     }
 
-    @Override
-    public void onSuccessToConnect()
+    private void onSuccessToConnect()
     {
         finishLoading();
         loadNextActivity();
     }
 
-    @Override
-    public void onFailToCoonnect(String reason)
+    private void onFailToConnect(String reason)
     {
         finishLoading();
         loadFrame(reCreate(reason));
@@ -116,8 +114,8 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         progressDialog.show();
     }
 
-
-    private void loadFrame(Fragment fragmentToLoad)
+    @Override
+    public void loadFrame(Fragment fragmentToLoad)
     {
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -134,7 +132,7 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         if (status.equals("OK")) {
             onSuccessToConnect();
         } else {
-            onFailToCoonnect(status);
+            onFailToConnect(status);
         }
     }
 
@@ -144,19 +142,33 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         if (status.equals("OK")) {
             onSuccessToConnect();
         } else {
-            onFailToCoonnect(status);
+            onFailToConnect(status);
         }
     }
 
     private Fragment reCreate(String errorDescription)
     {
-        SignFrame signFragment = new SignFrame();
+        if (currentFragment == null) {
+            currentFragment = new SignInFrame();
+            return currentFragment;
 
-        Bundle args = new Bundle();
-        args.putString("error", errorDescription);
-        signFragment.setArguments(args);
+        } else {
+            Fragment Fragment = null;
 
-        return signFragment;
+            try {
+                Fragment = currentFragment.getClass().newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+            Bundle args = new Bundle();
+            args.putString("error", errorDescription);
+            Fragment.setArguments(args);
+
+            return Fragment;
+        }
     }
 
     @Override

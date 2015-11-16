@@ -1,5 +1,6 @@
 package com.example.user.androidsimplechat;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import com.example.user.androidsimplechat.model.Client;
 
@@ -8,14 +9,11 @@ import com.example.user.androidsimplechat.model.Client;
  */
 public interface ILoadable
 {
-    void loadNextActivity();
-
-    void onSuccessToConnect();
-
-    void onFailToCoonnect(String reason);
 
     void finishLoading();
 
     void startLoad();
+
+    void loadFrame(Fragment fragment);
 
 }
