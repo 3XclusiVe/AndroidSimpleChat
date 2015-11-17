@@ -51,6 +51,7 @@ public class ChatListFrame extends FrameAttachedToMainActivity
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+        responceChatList();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -65,7 +66,6 @@ public class ChatListFrame extends FrameAttachedToMainActivity
             }
         });
 
-        responceChatList();
     }
 
     @Override

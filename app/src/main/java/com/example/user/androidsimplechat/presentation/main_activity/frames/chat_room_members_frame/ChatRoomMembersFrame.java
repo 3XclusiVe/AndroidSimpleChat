@@ -33,7 +33,7 @@ public class ChatRoomMembersFrame extends FrameAttachedToMainActivity
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.chat_room_frame, null);
+        View v = inflater.inflate(R.layout.chat_room_members, null);
 
 
         // находим список
@@ -59,6 +59,7 @@ public class ChatRoomMembersFrame extends FrameAttachedToMainActivity
     {
         super.onViewCreated(view, savedInstanceState);
 
+        responceMembers();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -73,7 +74,6 @@ public class ChatRoomMembersFrame extends FrameAttachedToMainActivity
             }
         });
 
-        responceMembers();
     }
 
 

@@ -27,7 +27,7 @@ public class Client implements ICallbackable, Serializable
 
     private SocketClient socketClient;
     private List<ChatMember> chatMembers;
-    private List<IChatServerResponcesObserver> observers;
+    private static List<IChatServerResponcesObserver> observers;
 
     private Object lock = new Object();
 
@@ -47,6 +47,26 @@ public class Client implements ICallbackable, Serializable
         socketClient.sendRequest(Protocol.registration(login, password, nickname));
     }
 
+    public Client(String login, String password, String nickname, IChatServerResponcesObserver observer) throws IOException
+    {
+
+        socketClient = new SocketClient(IP, Port, this);
+
+        this.selfLogin = login;
+        this.selfPassword = password;
+        this.selfNickname = nickname;
+
+        socketClient.connect();
+        socketClient.sendHello();
+
+        observers = new ArrayList<IChatServerResponcesObserver>();
+
+        subscribe(observer);
+
+        socketClient.sendRequest(Protocol.registration(login, password, nickname));
+
+    }
+
     public Client(String login, String password) throws IOException
     {
         socketClient = new SocketClient(IP, Port, this);
@@ -62,7 +82,26 @@ public class Client implements ICallbackable, Serializable
         socketClient.sendRequest(Protocol.authorization(login, password));
     }
 
-    public void subscribe(IChatServerResponcesObserver observer)
+    public Client(String login, String password, IChatServerResponcesObserver observer) throws IOException
+    {
+
+        socketClient = new SocketClient(IP, Port, this);
+
+        this.selfLogin = login;
+        this.selfPassword = password;
+
+        socketClient.connect();
+        socketClient.sendHello();
+
+        observers = new ArrayList<IChatServerResponcesObserver>();
+
+        subscribe(observer);
+
+        socketClient.sendRequest(Protocol.authorization(login, password));
+
+    }
+
+    public static void subscribe(IChatServerResponcesObserver observer)
     {
         observers.add(observer);
     }
@@ -80,6 +119,11 @@ public class Client implements ICallbackable, Serializable
     public void getUserInfo(String userId) throws IOException
     {
         socketClient.sendRequest(Protocol.userInfo(userId, selfUserId, selfSessionId));
+    }
+
+    public void getSelfUserInfo() throws IOException
+    {
+        socketClient.sendRequest(Protocol.userInfo(selfUserId, selfUserId, selfSessionId));
     }
 
     public void enterRoom(String chatId) throws IOException

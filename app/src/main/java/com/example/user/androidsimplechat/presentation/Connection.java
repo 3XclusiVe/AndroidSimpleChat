@@ -40,8 +40,7 @@ public class Connection extends AsyncTask<String, Void, Void>
                     client.disconnect();
                 }
 
-                ServerClient.instance = new Client(login, password);
-                ServerClient.instance.subscribe((IChatServerResponcesObserver) activity);
+                ServerClient.instance = new Client(login, password, (IChatServerResponcesObserver) activity);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -56,8 +55,7 @@ public class Connection extends AsyncTask<String, Void, Void>
                     client.disconnect();
                 }
 
-                ServerClient.instance = new Client(login, password, nick);
-                ServerClient.instance.subscribe((IChatServerResponcesObserver) activity);
+                ServerClient.instance = new Client(login, password, nick, (IChatServerResponcesObserver) activity);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -20,7 +20,7 @@ public class UserInfoFrame extends FrameAttachedToMainActivity
 {
     private TextView userName;
     private TextView userStatus;
-    private static String currentUserId;
+    private String currentUserId;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -36,6 +36,7 @@ public class UserInfoFrame extends FrameAttachedToMainActivity
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
+        super.onViewCreated(view, savedInstanceState);
         responceUserInformation();
     }
 
@@ -43,7 +44,11 @@ public class UserInfoFrame extends FrameAttachedToMainActivity
     {
         startLoad();
         try {
-            ServerClient.instance.getUserInfo(currentUserId);
+            if (currentUserId == null) {
+                ServerClient.instance.getSelfUserInfo();
+            } else {
+                ServerClient.instance.getUserInfo(currentUserId);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

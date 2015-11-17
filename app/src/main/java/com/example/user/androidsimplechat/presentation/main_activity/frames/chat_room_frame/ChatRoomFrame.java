@@ -68,6 +68,8 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
     {
         super.onViewCreated(view, savedInstanceState);
 
+        responceLastMessages();
+
         sendButton.setOnClickListener(new View.OnClickListener()
         {
 
@@ -99,7 +101,6 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
             }
         });
 
-        responceLastMessages();
     }
 
 

@@ -1,82 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:gravity="center"
-              android:orientation="vertical"
-              android:padding="10dp">
 
-    <LinearLayout
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:fillViewport="true">
 
-        <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:padding="10dp">
+
+        <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/error"
-                android:textColor="@color/error_message_color"
-                android:layout_centerHorizontal="true"
-                android:text="dsfsdfs"
-                android:gravity="center"/>
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
 
-        <EditText
-                android:id="@+id/nickname"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/nickname_edittext_hint"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:inputType="textCapWords"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/error"
+                    android:textColor="@color/error_message_color"
+                    android:layout_centerHorizontal="true"
+                    android:text="dsfsdfs"
+                    android:gravity="center"/>
 
-        <EditText
-                android:id="@+id/login"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/login_edittext_hint"
-                android:inputType="textEmailAddress"
-                android:padding="10dp"
-                android:singleLine="true"/>
+            <EditText
+                    android:id="@+id/nickname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/nickname_edittext_hint"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textCapWords"/>
 
-        <EditText
-                android:id="@+id/password"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/password_edittext_hint"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:singleLine="true"
-                />
+            <EditText
+                    android:id="@+id/login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/login_edittext_hint"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:singleLine="true"/>
 
-        <!-- Login Button -->
+            <EditText
+                    android:id="@+id/password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/password_edittext_hint"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    />
 
-        <Button
-                android:id="@+id/connect_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:background="@color/bg_btn_join"
-                android:text="@string/login_button_text"
-                android:textColor="@color/white"/>
+            <!-- Login Button -->
 
-        <!-- Link to Login Screen -->
+            <Button
+                    android:id="@+id/connect_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:background="@color/bg_btn_join"
+                    android:text="@string/login_button_text"
+                    android:textColor="@color/white"/>
 
-        <Button
-                android:id="@+id/change_perspective_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="@string/go_authorization_button_text"
-                android:textAllCaps="false"
-                android:textColor="@color/body_background_blue"
-                android:textSize="15dp" android:layout_marginTop="40dp"/>
+            <!-- Link to Login Screen -->
+
+            <Button
+                    android:id="@+id/change_perspective_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/go_authorization_button_text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/body_background_blue"
+                    android:textSize="15dp" android:layout_marginTop="40dp"/>
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
