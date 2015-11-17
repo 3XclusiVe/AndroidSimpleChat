@@ -20,6 +20,7 @@ public class UserInfoFrame extends FrameAttachedToMainActivity
 {
     private TextView userName;
     private TextView userStatus;
+    private static String currentUserId;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -42,7 +43,7 @@ public class UserInfoFrame extends FrameAttachedToMainActivity
     {
         startLoad();
         try {
-            ServerClient.instance.getUserInfo(ServerClient.userId);
+            ServerClient.instance.getUserInfo(currentUserId);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,6 +78,12 @@ public class UserInfoFrame extends FrameAttachedToMainActivity
     protected String getActionBarTitle()
     {
         return getString(R.string.title_user_info);
+    }
+
+    @Override
+    protected void onReceiveArgument(Bundle args)
+    {
+        currentUserId = args.getString("userId");
     }
 
     @Override

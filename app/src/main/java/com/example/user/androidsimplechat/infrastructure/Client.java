@@ -26,6 +26,7 @@ public class Client implements ICallbackable, Serializable
     private final int Port = 7777;
 
     private SocketClient socketClient;
+    private List<ChatMember> chatMembers;
     private List<IChatServerResponcesObserver> observers;
 
     private Object lock = new Object();
@@ -274,6 +275,27 @@ public class Client implements ICallbackable, Serializable
 
                     }
 
+                    List<ChatMember> chatMembers = new ArrayList<ChatMember>();
+
+                    int chatMembersCount = users.length();
+                    for (int i = 0; i < chatMembersCount; i++) {
+                        JSONObject jsMember = users.getJSONObject(i);
+
+                        String userId = jsMember.getString("uid");
+                        String nick = jsMember.getString("nick");
+
+                        Message chatMemberMessage = new Message("присутствует" + " на канале", userId, nick);
+                        lastMessages.add(chatMemberMessage);
+
+                        ChatMember member = new ChatMember(nick, null, userId);
+
+                        chatMembers.add(member);
+
+                    }
+
+                    this.chatMembers = chatMembers;
+
+
                     for (IChatServerResponcesObserver observer : observers) {
                         observer.onEnterToChannel(lastMessages);
                     }
@@ -286,6 +308,11 @@ public class Client implements ICallbackable, Serializable
                 print("error");
                 break;
         }
+    }
+
+    public List<ChatMember> getChatMembersList()
+    {
+        return chatMembers;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.user.androidsimplechat.presentation.main_activity.frames.chat_list_frame;
 
+import android.app.Fragment;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -57,8 +58,10 @@ public class ChatListFrame extends FrameAttachedToMainActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 ChatListAdapter.ViewHolder viewHolder = (ChatListAdapter.ViewHolder) view.getTag();
-                ServerClient.currentChatId = viewHolder.chatId;
-                mainActivity.loadFrame(new ChatRoomFrame());
+
+                String argKey = "chatId";
+                String arg = viewHolder.chatId;
+                mainActivity.loadFrame(newInstance(new ChatRoomFrame(), argKey, arg));
             }
         });
 
@@ -69,6 +72,12 @@ public class ChatListFrame extends FrameAttachedToMainActivity
     protected String getActionBarTitle()
     {
         return getString(R.string.title_chat_list);
+    }
+
+    @Override
+    protected void onReceiveArgument(Bundle args)
+    {
+
     }
 
     protected void responceChatList()

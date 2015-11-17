@@ -32,6 +32,8 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
     private static List<Message> messages;
     private static ChatRoomAdapter adapter;
 
+    private static String currentChatId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -91,14 +93,15 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
             {
                 ChatRoomAdapter.ViewHolder viewHolder = (ChatRoomAdapter.ViewHolder) view.getTag();
 
-                ServerClient.userId = viewHolder.getUserId();
-
-                mainActivity.loadFrame(new UserInfoFrame());
+                String argKey = "userId";
+                String arg = viewHolder.userId;
+                mainActivity.loadFrame(newInstance(new UserInfoFrame(), argKey, arg));
             }
         });
 
         responceLastMessages();
     }
+
 
     @Override
     public void onDestroyView()
@@ -115,7 +118,7 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
     {
         startLoad();
         try {
-            ServerClient.instance.enterRoom(ServerClient.currentChatId);
+            ServerClient.instance.enterRoom(currentChatId);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -124,6 +127,18 @@ public class ChatRoomFrame extends FrameAttachedToMainActivity
     protected String getActionBarTitle()
     {
         return getString(R.string.title_chat_room);
+    }
+
+    @Override
+    protected int getActionBar()
+    {
+        return R.menu.chat_room_menu;
+    }
+
+    @Override
+    protected void onReceiveArgument(Bundle args)
+    {
+        currentChatId = args.getString("chatId");
     }
 
     @Override

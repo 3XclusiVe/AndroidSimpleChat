@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import com.example.user.androidsimplechat.R;
 import com.example.user.androidsimplechat.presentation.ILoadable;
@@ -144,6 +145,7 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
     public void onAuthorization(String status)
     {
         if (status.equals("OK")) {
+            Log.d("@@@@@", "@@@@@@");
             onSuccessToConnect();
         } else {
             onFailToConnect(status);

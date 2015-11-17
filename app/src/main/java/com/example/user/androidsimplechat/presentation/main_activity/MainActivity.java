@@ -13,6 +13,7 @@ import com.example.user.androidsimplechat.presentation.ServerClient;
 import com.example.user.androidsimplechat.presentation.main_activity.frames.chat_list_frame.ChatListFrame;
 import com.example.user.androidsimplechat.presentation.main_activity.frames.Preferences;
 import com.example.user.androidsimplechat.presentation.main_activity.frames.UserInfoFrame;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.chat_room_members_frame.ChatRoomMembersFrame;
 
 import java.io.IOException;
 
@@ -58,6 +59,10 @@ public class MainActivity extends Activity implements IFramable
 
             case R.id.action_account:
                 loadFrame(new UserInfoFrame());
+                return true;
+
+            case R.id.action_online_users:
+                loadFrame(new ChatRoomMembersFrame());
                 return true;
         }
 

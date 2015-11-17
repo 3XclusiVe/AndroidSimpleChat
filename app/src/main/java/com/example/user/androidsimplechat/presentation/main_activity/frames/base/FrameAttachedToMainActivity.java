@@ -44,6 +44,26 @@ public abstract class FrameAttachedToMainActivity extends Fragment implements IC
     protected abstract String getActionBarTitle();
 
     @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        if (args != null) {
+            onReceiveArgument(args);
+        }
+    }
+
+    protected abstract void onReceiveArgument(Bundle args);
+
+    public static Fragment newInstance(Fragment instacne, String argKey, String argName)
+    {
+        Bundle args = new Bundle();
+        args.putString(argKey, argName);
+        instacne.setArguments(args);
+        return instacne;
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         super.onCreateOptionsMenu(menu, inflater);
