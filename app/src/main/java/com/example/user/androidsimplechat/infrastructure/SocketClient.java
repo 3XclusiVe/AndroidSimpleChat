@@ -5,7 +5,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
 /**
@@ -30,9 +32,13 @@ public class SocketClient
     public void connect() throws UnknownHostException, IOException
     {
         log("Attempting to connect to " + hostname + ":" + port);
+
         socketClient = new Socket(hostname, port);
+
+        log("Connected!");
+
         connected = true;
-        log("Connection Established");
+
         submit();
     }
 

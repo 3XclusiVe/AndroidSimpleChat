@@ -24,12 +24,42 @@ public class Client implements ICallbackable, Serializable
 
     private final String IP = "188.166.49.215";
     private final int Port = 7777;
+    private int timeOutToConnect = 5 * 1000;
 
     private SocketClient socketClient;
     private List<ChatMember> chatMembers;
     private static List<IChatServerResponcesObserver> observers;
 
-    private Object lock = new Object();
+    private class TimeOutThread extends Thread
+    {
+
+        private int miliseconds;
+        private IChatServerResponcesObserver observer;
+
+        public boolean connected = false;
+
+        public TimeOutThread(int miliseconds, IChatServerResponcesObserver observer)
+        {
+            this.miliseconds = miliseconds;
+            this.observer = observer;
+        }
+
+        @Override
+        public void run()
+        {
+            try {
+                Thread.sleep(miliseconds);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (!connected) {
+                if (observer != null) {
+                    observer.onAuthorization("no internet");
+                }
+            }
+
+        }
+    }
 
     public Client(String login, String password, String nickname) throws IOException, IllegalArgumentException
     {
@@ -49,14 +79,17 @@ public class Client implements ICallbackable, Serializable
 
     public Client(String login, String password, String nickname, IChatServerResponcesObserver observer) throws IOException
     {
-
         socketClient = new SocketClient(IP, Port, this);
 
         this.selfLogin = login;
         this.selfPassword = password;
         this.selfNickname = nickname;
 
+        TimeOutThread timeOutThread = new TimeOutThread(timeOutToConnect, observer);
+        timeOutThread.start();
         socketClient.connect();
+        timeOutThread.connected = true;
+
         socketClient.sendHello();
 
         observers = new ArrayList<IChatServerResponcesObserver>();
@@ -90,7 +123,11 @@ public class Client implements ICallbackable, Serializable
         this.selfLogin = login;
         this.selfPassword = password;
 
+        TimeOutThread timeOutThread = new TimeOutThread(timeOutToConnect, observer);
+        timeOutThread.start();
         socketClient.connect();
+        timeOutThread.connected = true;
+
         socketClient.sendHello();
 
         observers = new ArrayList<IChatServerResponcesObserver>();

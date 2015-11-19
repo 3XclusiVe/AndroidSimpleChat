@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.user.androidsimplechat.presentation.ILoadable;
 import com.example.user.androidsimplechat.R;
 import com.example.user.androidsimplechat.presentation.Connection;
+import com.example.user.androidsimplechat.utils.AthorizationDataSaver;
 
 /**
  * Created by user on 16.11.15.
@@ -69,6 +70,8 @@ public abstract class FragmentAtachedToSplashScreen extends Fragment
                                                String login = loginEditText.getText().toString();
                                                String password = passwordEditText.getText().toString();
                                                String nick = nickNameEditText.getText().toString();
+
+                                               new AthorizationDataSaver(getActivity(), login, password);
 
 
                                                connectionTask = new Connection(mainActivity);

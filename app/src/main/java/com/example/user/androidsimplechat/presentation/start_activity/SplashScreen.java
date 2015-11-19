@@ -15,6 +15,7 @@ import com.example.user.androidsimplechat.presentation.Connection;
 import com.example.user.androidsimplechat.infrastructure.IChatServerResponcesObserver;
 import com.example.user.androidsimplechat.model.*;
 import com.example.user.androidsimplechat.presentation.main_activity.MainActivity;
+import com.example.user.androidsimplechat.utils.AthorizationDataSaver;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,10 +27,6 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
 
     private volatile ProgressDialog progressDialog;
 
-    static String login = "mmmalkin007@mail.r";
-    static String pass = "123465";
-    static String nick = "QW12";
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,7 +37,11 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
             nextActivityToLoad = MainActivity.class;
         }
         if (savedInstanceState == null) {
+            String login = AthorizationDataSaver.getSavedLogin(this);
+            String pass = AthorizationDataSaver.getSavedPassword(this);
             Connection connection = new Connection(this);
+
+            AthorizationDataSaver.Clear(this);
             connection.execute(login, pass);
         }
 
@@ -125,7 +126,8 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment, fragmentToLoad);
-        ft.commit();
+        //ft.commit();
+        ft.commitAllowingStateLoss();
         this.invalidateOptionsMenu();
         currentFragment = fragmentToLoad;
 
