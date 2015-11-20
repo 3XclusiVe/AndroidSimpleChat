@@ -41,7 +41,6 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
             String pass = AthorizationDataSaver.getSavedPassword(this);
             Connection connection = new Connection(this);
 
-            AthorizationDataSaver.Clear(this);
             connection.execute(login, pass);
         }
 
@@ -67,7 +66,9 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
             currentFragment = null;
 
             try {
-                ServerClient.instance.disconnect();
+                if (ServerClient.instance != null) {
+                    ServerClient.instance.disconnect();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -126,8 +127,8 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment, fragmentToLoad);
-        //ft.commit();
-        ft.commitAllowingStateLoss();
+        ft.commit();
+        //ft.commitAllowingStateLoss();
         this.invalidateOptionsMenu();
         currentFragment = fragmentToLoad;
 
@@ -191,6 +192,12 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
     }
 
     @Override
+    public void onCreateChannel(String status)
+    {
+
+    }
+
+    @Override
     public void onUserInfo(Account user)
     {
 
@@ -210,6 +217,12 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
 
     @Override
     public void onMessage(Message message)
+    {
+
+    }
+
+    @Override
+    public void onChangeUserInfo()
     {
 
     }

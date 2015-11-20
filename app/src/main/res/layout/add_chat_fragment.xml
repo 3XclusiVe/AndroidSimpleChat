@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:padding="10dp">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/error"
+                    android:textColor="@color/error_message_color"
+                    android:layout_centerHorizontal="true"
+                    android:text="dsfsdfs"
+                    android:gravity="center"/>
+
+            <EditText
+                    android:id="@+id/chat_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/chat_name_edittext_hint"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    />
+
+            <EditText
+                    android:id="@+id/chat_description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/chat_description_edittext_hint"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:singleLine="true"/>
+
+            <!-- Login Button -->
+
+            <Button
+                    android:id="@+id/create_chat_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:background="@color/bg_btn_join"
+                    android:text="@string/create_button_text"
+                    android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

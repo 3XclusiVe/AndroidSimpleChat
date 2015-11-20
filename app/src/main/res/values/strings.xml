@@ -12,6 +12,7 @@
     <string name="title_chat_list">Chat List</string>
     <string name="title_user_info">User Info</string>
     <string name="title_chat_room">Chat Room</string>
+    <string name="title_chat_room_members">Chat Room Memebers</string>
     <string name="title_sign">Sign</string>
 
     <string name="btn_authorization">Sign In</string>
@@ -27,6 +28,16 @@
     <string name="go_authorization_button_text">Already have an account? Sign
         in.
     </string>
+
+    <!-- Add Chat Fragment -->
+    <string name="chat_name_edittext_hint">Name of Chat</string>
+    <string name="chat_description_edittext_hint">Description</string>
+    <string name="create_button_text">Create Chat Room</string>
+    <string name="add_chat_room_title">New Chat Room</string>
+
+    <!-- Set user info fragment -->
+    <string name="user_status_edittext_hint">status</string>
+    <string name="change_user_info_button">save</string>
 
 
 </resources>

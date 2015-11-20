@@ -1,5 +1,6 @@
 package com.example.user.androidsimplechat.presentation.main_activity.frames.chat_room_members_frame;
 
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.user.androidsimplechat.R;
@@ -80,23 +81,28 @@ public class ChatRoomMembersFrame extends FrameAttachedToMainActivity
     private void responceMembers()
     {
         startLoad();
-
-        chatMembers = ServerClient.instance.getChatMembersList();
-
         onRecieveChatMembers();
 
     }
 
     private void onRecieveChatMembers()
     {
-        adapter.notifyDataSetChanged();
-        listView.invalidateViews();
-        finishLoading();
+        listView.post(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                chatMembers = ServerClient.instance.getChatMembersList();
+                adapter.notifyDataSetChanged();
+                listView.invalidateViews();
+                finishLoading();
+            }
+        });
     }
 
     protected String getActionBarTitle()
     {
-        return getString(R.string.title_chat_room);
+        return getString(R.string.title_chat_room_members);
     }
 
     @Override

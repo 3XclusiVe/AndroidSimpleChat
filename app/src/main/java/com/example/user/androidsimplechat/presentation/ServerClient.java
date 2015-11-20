@@ -7,5 +7,5 @@ import com.example.user.androidsimplechat.infrastructure.Client;
  */
 public class ServerClient
 {
-    public static Client instance;
+    public volatile static Client instance;
 }

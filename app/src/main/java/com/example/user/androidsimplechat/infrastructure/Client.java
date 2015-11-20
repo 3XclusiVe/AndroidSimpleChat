@@ -12,7 +12,7 @@ import java.util.*;
 import java.io.IOException;
 import java.util.List;
 
-public class Client implements ICallbackable, Serializable
+public class Client implements ICallbackable
 {
     private String selfSessionId = new String();
     private String selfUserId = new String();
@@ -27,7 +27,7 @@ public class Client implements ICallbackable, Serializable
     private int timeOutToConnect = 5 * 1000;
 
     private SocketClient socketClient;
-    private List<ChatMember> chatMembers;
+    private List<ChatMember> chatMembers = new ArrayList<ChatMember>();
     private static List<IChatServerResponcesObserver> observers;
 
     private class TimeOutThread extends Thread
@@ -138,6 +138,11 @@ public class Client implements ICallbackable, Serializable
 
     }
 
+    public String getSelfUserId()
+    {
+        return selfUserId;
+    }
+
     public static void subscribe(IChatServerResponcesObserver observer)
     {
         observers.add(observer);
@@ -153,6 +158,11 @@ public class Client implements ICallbackable, Serializable
         socketClient.sendRequest(Protocol.chatList(selfUserId, selfSessionId));
     }
 
+    public void createChatRoom(String chatName, String chatDescription) throws IOException
+    {
+        socketClient.sendRequest(Protocol.createChatRoom(selfUserId, selfSessionId, chatName, chatDescription));
+    }
+
     public void getUserInfo(String userId) throws IOException
     {
         socketClient.sendRequest(Protocol.userInfo(userId, selfUserId, selfSessionId));
@@ -161,6 +171,11 @@ public class Client implements ICallbackable, Serializable
     public void getSelfUserInfo() throws IOException
     {
         socketClient.sendRequest(Protocol.userInfo(selfUserId, selfUserId, selfSessionId));
+    }
+
+    public void setSelfUserInfo(String status) throws IOException
+    {
+        socketClient.sendRequest(Protocol.changeUserInfo(selfUserId, selfUserId, status));
     }
 
     public void enterRoom(String chatId) throws IOException
@@ -374,7 +389,10 @@ public class Client implements ICallbackable, Serializable
 
                     }
 
-                    this.chatMembers = chatMembers;
+                    this.chatMembers.clear();
+                    for (ChatMember chatMember : chatMembers) {
+                        this.chatMembers.add(chatMember);
+                    }
 
 
                     for (IChatServerResponcesObserver observer : observers) {
@@ -386,6 +404,28 @@ public class Client implements ICallbackable, Serializable
                 }
                 break;
             default:
+                print("error");
+                break;
+        }
+    }
+
+    @Override
+    public void onCreateChannel(JSONObject responce)
+    {
+        int error = getReport(responce);
+        switch (error) {
+            case Status.OK:
+
+                for (IChatServerResponcesObserver observer : observers) {
+                    observer.onCreateChannel("OK");
+                }
+
+                break;
+            default:
+                String errorDecription = getErrorDescrition(responce);
+                for (IChatServerResponcesObserver observer : observers) {
+                    observer.onCreateChannel(errorDecription);
+                }
                 print("error");
                 break;
         }
@@ -503,6 +543,24 @@ public class Client implements ICallbackable, Serializable
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onChangeUserInfo(JSONObject responce)
+    {
+        int error = getReport(responce);
+        switch (error) {
+            case Status.OK:
+
+                for (IChatServerResponcesObserver observer : observers) {
+                    observer.onChangeUserInfo();
+                }
+
+                break;
+            default:
+                print("error");
+                break;
         }
     }
 

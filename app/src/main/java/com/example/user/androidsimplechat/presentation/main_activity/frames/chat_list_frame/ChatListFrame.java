@@ -75,6 +75,12 @@ public class ChatListFrame extends FrameAttachedToMainActivity
     }
 
     @Override
+    protected int getActionBar()
+    {
+        return R.menu.chat_list_menu;
+    }
+
+    @Override
     protected void onReceiveArgument(Bundle args)
     {
 

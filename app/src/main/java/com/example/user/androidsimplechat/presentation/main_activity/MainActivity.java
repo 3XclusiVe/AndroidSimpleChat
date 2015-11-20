@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import com.example.user.androidsimplechat.R;
 import com.example.user.androidsimplechat.presentation.IFramable;
 import com.example.user.androidsimplechat.presentation.ServerClient;
+import com.example.user.androidsimplechat.presentation.main_activity.add_chat_room_fragment.AddChatRoomFragment;
 import com.example.user.androidsimplechat.presentation.main_activity.frames.chat_list_frame.ChatListFrame;
 import com.example.user.androidsimplechat.presentation.main_activity.frames.Preferences;
 import com.example.user.androidsimplechat.presentation.main_activity.frames.UserInfoFrame;
 import com.example.user.androidsimplechat.presentation.main_activity.frames.chat_room_members_frame.ChatRoomMembersFrame;
+import com.example.user.androidsimplechat.presentation.main_activity.frames.self_user_info_fragment.self_user_info_fragment;
 
 import java.io.IOException;
 
@@ -38,9 +40,6 @@ public class MainActivity extends Activity implements IFramable
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        ActionBar actionBar = getActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
@@ -58,11 +57,11 @@ public class MainActivity extends Activity implements IFramable
                 return true;
 
             case R.id.action_account:
-                loadFrame(new UserInfoFrame());
+                loadFrame(new self_user_info_fragment());
                 return true;
 
-            case R.id.action_online_users:
-                loadFrame(new ChatRoomMembersFrame());
+            case R.id.action_add_chat:
+                loadFrame(new AddChatRoomFragment());
                 return true;
         }
 

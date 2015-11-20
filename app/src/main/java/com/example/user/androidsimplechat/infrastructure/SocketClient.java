@@ -33,7 +33,9 @@ public class SocketClient
     {
         log("Attempting to connect to " + hostname + ":" + port);
 
-        socketClient = new Socket(hostname, port);
+        //socketClient = new Socket(hostname, port);
+        socketClient = new Socket();
+        socketClient.connect(new InetSocketAddress(hostname, port), 5 * 1000);
 
         log("Connected!");
 
@@ -131,6 +133,12 @@ public class SocketClient
                 JSONObject serverResponce = getResponceData(serverMessage);
                 Client.OnMessage(serverResponce);
 
+            } else if (currentAction.equals(Protocol.Actions.OnCreateChannel)) {
+                JSONObject serverResponce = getResponceData(serverMessage);
+                Client.onCreateChannel(serverResponce);
+            } else if (currentAction.equals(Protocol.Actions.OnChangeUserInfo)) {
+                JSONObject serverResponce = getResponceData(serverMessage);
+                Client.onChangeUserInfo(serverResponce);
             }
 
         } catch (JSONException e) {

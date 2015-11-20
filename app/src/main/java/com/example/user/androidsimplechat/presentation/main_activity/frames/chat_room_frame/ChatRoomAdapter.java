@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.user.androidsimplechat.R;
 import com.example.user.androidsimplechat.model.Message;
+import com.example.user.androidsimplechat.presentation.ServerClient;
 
 public class ChatRoomAdapter extends BaseAdapter
 {
@@ -64,15 +65,13 @@ public class ChatRoomAdapter extends BaseAdapter
     {
         ViewHolder viewHolder;
 
+        Message message = messages.get(position);
+
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            if (position % 2 == 0) {
-                convertView = inflater.inflate(R.layout.chatroom_message, null);
-            } else {
-                convertView = inflater.inflate(R.layout.chatroom_message, null);
-            }
+            convertView = inflater.inflate(R.layout.chatroom_message, null);
 
             viewHolder = new ViewHolder();
             viewHolder.messageContent = (TextView) convertView.findViewById(R.id.txtMsg);
@@ -81,8 +80,6 @@ public class ChatRoomAdapter extends BaseAdapter
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        Message message = messages.get(position);
 
         viewHolder.senderNickname.setText(message.getSenderNickname());
         viewHolder.messageContent.setText(message.getContent());

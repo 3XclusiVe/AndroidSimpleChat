@@ -16,6 +16,8 @@ public interface IChatServerResponcesObserver
 
     void onEnterToChannel(List<Message> messages);
 
+    void onCreateChannel(String status);
+
     void onUserInfo(Account user);
 
     void onUserLeaveChannel(Message message);
@@ -23,4 +25,6 @@ public interface IChatServerResponcesObserver
     void onUserEnterToChannel(Message message);
 
     void onMessage(Message message);
+
+    void onChangeUserInfo();
 }

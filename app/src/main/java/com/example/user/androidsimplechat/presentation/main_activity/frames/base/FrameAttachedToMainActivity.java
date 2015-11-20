@@ -125,6 +125,12 @@ public abstract class FrameAttachedToMainActivity extends Fragment implements IC
     }
 
     @Override
+    public void onCreateChannel(String status)
+    {
+
+    }
+
+    @Override
     public void onUserInfo(Account user)
     {
 
@@ -144,6 +150,12 @@ public abstract class FrameAttachedToMainActivity extends Fragment implements IC
 
     @Override
     public void onMessage(Message message)
+    {
+
+    }
+
+    @Override
+    public void onChangeUserInfo()
     {
 
     }

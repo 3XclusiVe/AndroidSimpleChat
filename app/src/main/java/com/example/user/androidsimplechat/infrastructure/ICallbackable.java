@@ -12,6 +12,8 @@ public interface ICallbackable
 
     void onEnterToChannel(JSONObject responce);
 
+    void onCreateChannel(JSONObject responce);
+
     void onUserInfo(JSONObject responce);
 
     void onLeaveChannel(JSONObject responce);
@@ -21,4 +23,6 @@ public interface ICallbackable
     void OnUserEnterToChannel(JSONObject responce);
 
     void OnMessage(JSONObject responce);
+
+    void onChangeUserInfo(JSONObject responce);
 }

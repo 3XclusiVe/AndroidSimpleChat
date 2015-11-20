@@ -12,12 +12,14 @@ public class Protocol
         public static final String Authorization = "auth";
         public static final String Registration = "register";
         public static final String Channellist = "channellist";
+        public static final String OnCreateChannel = "createchannel";
         public static final String EnterChannel = "enter";
         public static final String UserInformation = "userinfo";
         public static final String LeaveChannel = "leave";
         public static final String OnEnter = "ev_enter";
         public static final String OnLeave = "ev_leave";
         public static final String OnMessage = "ev_message";
+        public static final String OnChangeUserInfo = "setuserinfo";
     }
 
     ;
@@ -122,6 +124,51 @@ public class Protocol
             dataJsonObject.put("cid", cid);
             dataJsonObject.put("sid", sid);
             dataJsonObject.put("channel", channelId);
+
+
+            actionJsonObject.put(action, currentAction);
+            actionJsonObject.put(data, dataJsonObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return actionJsonObject;
+    }
+
+    public static JSONObject createChatRoom(String cid, String sid, String channelName, String channelDescription)
+    {
+        JSONObject actionJsonObject = new JSONObject();
+
+        JSONObject dataJsonObject = new JSONObject();
+        try {
+            String currentAction = "createchannel";
+
+            dataJsonObject.put("cid", cid);
+            dataJsonObject.put("sid", sid);
+            dataJsonObject.put("name", channelName);
+            dataJsonObject.put("descr", channelDescription);
+
+
+            actionJsonObject.put(action, currentAction);
+            actionJsonObject.put(data, dataJsonObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return actionJsonObject;
+    }
+
+    public static JSONObject changeUserInfo(String cid, String sid, String status)
+    {
+        JSONObject actionJsonObject = new JSONObject();
+
+        JSONObject dataJsonObject = new JSONObject();
+        try {
+            String currentAction = "setuserinfo";
+
+            dataJsonObject.put("cid", cid);
+            dataJsonObject.put("sid", sid);
+            dataJsonObject.put("user_status", status);
 
 
             actionJsonObject.put(action, currentAction);
