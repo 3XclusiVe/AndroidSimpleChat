@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
 /**
@@ -65,11 +64,12 @@ public class SocketClient
                 InputStream inputStream = null;
                 try {
                     inputStream = socketClient.getInputStream();
-
+                    BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
                     while (connected) {
-                        if (inputStream.available() != 0) {
-                            incomingMessage += Character.toString((char) inputStream.read());
+                        if (in.ready()) {
+                            int symbol = in.read();
+                            incomingMessage += Character.toString((char) symbol);
 
                             if (isJSONValid(incomingMessage)) {
                                 log("SERVER: " + incomingMessage);
