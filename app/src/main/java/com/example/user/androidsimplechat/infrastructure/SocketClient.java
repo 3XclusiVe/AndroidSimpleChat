@@ -89,8 +89,9 @@ public class SocketClient
         }).start();
     }
 
-    private void handleMessage(String incomingMessage)
+    private void handleMessage(final String incomingMessage)
     {
+
         final String action = "action";
         try {
             JSONObject serverMessage = new JSONObject(incomingMessage);
@@ -144,6 +145,7 @@ public class SocketClient
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 
     private JSONObject getResponceData(JSONObject responce)

@@ -35,9 +35,9 @@ public class ChatListFrame extends FrameAttachedToMainActivity
         // находим список
         listView = (ListView) v.findViewById(R.id.chat_list);
 
-        //if (chatRooms == null) {
-        chatRooms = new ArrayList<ChatRoom>();
-        //}
+        if (chatRooms == null) {
+            chatRooms = new ArrayList<ChatRoom>();
+        }
         // создаем адаптер
         adapter = new ChatListAdapter(getActivity(), R.layout.chat_list_element, chatRooms);
 
@@ -88,7 +88,10 @@ public class ChatListFrame extends FrameAttachedToMainActivity
 
     protected void responceChatList()
     {
-        startLoad();
+        if (chatRooms == null || chatRooms.isEmpty()) {
+            startLoad();
+        }
+
         try {
             ServerClient.instance.getChatList();
         } catch (IOException e) {
