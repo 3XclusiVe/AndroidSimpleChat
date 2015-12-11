@@ -27,6 +27,9 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
 
     private volatile ProgressDialog progressDialog;
 
+    private String mLogin;
+    private String mPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,11 +40,11 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
             nextActivityToLoad = MainActivity.class;
         }
         if (savedInstanceState == null) {
-            String login = AthorizationDataSaver.getSavedLogin(this);
-            String pass = AthorizationDataSaver.getSavedPassword(this);
+            mLogin = AthorizationDataSaver.getSavedLogin(this);
+            mPassword = AthorizationDataSaver.getSavedPassword(this);
             Connection connection = new Connection(this);
 
-            connection.execute(login, pass);
+            connection.execute(mLogin, mPassword);
         }
 
     }
@@ -93,6 +96,7 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
 
     private void onSuccessToConnect()
     {
+        new AthorizationDataSaver(this, mLogin, mPassword);
         finishLoading();
         loadNextActivity();
     }
@@ -132,6 +136,13 @@ public class SplashScreen extends Activity implements ILoadable, IChatServerResp
         this.invalidateOptionsMenu();
         currentFragment = fragmentToLoad;
 
+    }
+
+    @Override
+    public void setAuthorizationInfo(String login, String password)
+    {
+        mLogin = login;
+        mPassword = password;
     }
 
     @Override

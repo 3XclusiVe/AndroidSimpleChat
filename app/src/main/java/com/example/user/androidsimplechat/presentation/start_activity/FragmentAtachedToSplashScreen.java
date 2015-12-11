@@ -71,7 +71,7 @@ public abstract class FragmentAtachedToSplashScreen extends Fragment
                                                String password = passwordEditText.getText().toString();
                                                String nick = nickNameEditText.getText().toString();
 
-                                               new AthorizationDataSaver(getActivity(), login, password);
+                                               mainActivity.setAuthorizationInfo(login, password);
 
 
                                                connectionTask = new Connection(mainActivity);

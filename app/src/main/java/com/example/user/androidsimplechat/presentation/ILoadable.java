@@ -14,4 +14,6 @@ public interface ILoadable
 
     void loadFrame(Fragment fragment);
 
+    void setAuthorizationInfo(String login, String password);
+
 }
