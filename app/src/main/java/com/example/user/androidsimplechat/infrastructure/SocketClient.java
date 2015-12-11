@@ -178,13 +178,25 @@ public class SocketClient
         writer.flush();
     }
 
-    public void sendRequest(JSONObject message) throws IOException
+    public void sendRequest(final JSONObject message) throws IOException
     {
-        String request = message.toString();
-        log("CLIENT: " + request);
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
-        writer.write(request);
-        writer.flush();
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                String request = message.toString();
+                log("CLIENT: " + request);
+                try {
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
+                    writer.write(request);
+                    writer.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
     private void log(String message)
