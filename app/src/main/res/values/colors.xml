@@ -14,4 +14,6 @@
     <color name="text_msg_input">#626262</color>
     <color name="lblFromName">#777777</color>
     <color name="error_message_color">#d03c2c</color>
+
+    <color name="secondary_text">#727272</color>>
 </resources>
