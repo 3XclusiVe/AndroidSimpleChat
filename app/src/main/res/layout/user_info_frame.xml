@@ -8,7 +8,7 @@
             android:id="@+id/user_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon"
+            android:src="@drawable/account_circle"
             android:layout_above="@+id/user_name"
             android:layout_centerHorizontal="true">
 

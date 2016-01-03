@@ -67,23 +67,28 @@ public class ChatRoomAdapter extends BaseAdapter
 
         Message message = messages.get(position);
 
-
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            convertView = inflater.inflate(R.layout.chatroom_message, null);
-
-            viewHolder = new ViewHolder();
-            viewHolder.messageContent = (TextView) convertView.findViewById(R.id.txtMsg);
-            viewHolder.senderNickname = (TextView) convertView.findViewById(R.id.lblMsgFrom);
-            convertView.setTag(viewHolder);
+        String messageUserId = message.getSender();
+        int messageStyle;
+        if (messageUserId.equals(ServerClient.instance.getSelfUserId())) {
+            messageStyle = R.layout.chatroom_self_message;
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            messageStyle = R.layout.chatroom_message;
         }
+
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        convertView = inflater.inflate(messageStyle, null);
+
+        viewHolder = new ViewHolder();
+        viewHolder.messageContent = (TextView) convertView.findViewById(R.id.txtMsg);
+        viewHolder.senderNickname = (TextView) convertView.findViewById(R.id.lblMsgFrom);
+
 
         viewHolder.senderNickname.setText(message.getSenderNickname());
         viewHolder.messageContent.setText(message.getContent());
         viewHolder.userId = message.getSender();
+        convertView.setTag(viewHolder);
 
         return convertView;
     }
