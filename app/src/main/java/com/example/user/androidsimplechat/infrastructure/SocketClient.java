@@ -5,9 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 
 /**
  * A Simple Socket client that connects to our socket server

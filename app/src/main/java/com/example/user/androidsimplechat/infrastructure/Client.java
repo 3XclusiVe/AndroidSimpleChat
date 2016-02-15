@@ -22,7 +22,7 @@ public class Client implements ICallbackable
     private String selfNickname;
     private String currentChatId;
 
-    private final String IP = "188.166.49.215";
+    private final String IP = "10.0.2.2";
     private final int Port = 7777;
     private int timeOutToConnect = 5 * 1000;
 
